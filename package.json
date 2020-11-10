@@ -1,7 +1,6 @@
 {
   "name": "homework-bot",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,5 +10,14 @@
   "dependencies": {
     "discord.js": "^12.4.1",
     "dotenv": "^8.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CammyFentreux/Discord-Homework-Bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CammyFentreux/Discord-Homework-Bot/issues"
+  },
+  "homepage": "https://github.com/CammyFentreux/Discord-Homework-Bot#readme",
+  "description": ""
 }
