@@ -4,7 +4,6 @@ const fs = require('fs')
 require('dotenv').config()
 
 const homework = JSON.parse(fs.readFileSync('homework.json'))
-console.log(homework['105'])
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -18,9 +17,12 @@ client.on('message', msg => {
   const command = args.shift().toLowerCase()
 
   if (command === 'homework') {
-    qNode = homework['105'].children['1'].children['pure-functions'].children['1']
-    image = fs.readFileSync(qNode.image)
-    msg.channel.send('', {files:[image]})
+    curr = homework
+    for (let i = 0; i < args.length; i++) {
+      curr = curr.children[args[i]]
+    }
+
+    sendNode(msg.channel, curr)
   }
 })
 
@@ -28,8 +30,20 @@ client.on('message', msg => {
 function sendNode(destination, node) {
   if (node.image) {
     image = fs.readFileSync(node.image)
-    destination.send(node.children, {files:image})
+    destination.send("", {files:[image]})
   }
+
+  message = ''
+  if (node.alt_desc) {
+    message += `\n${node.alt_desc}\n`
+  }
+  if (node.children) {
+    message += '\nSubs:\n'
+    for ([key, value] of Object.entries(node.children)) {
+      message += `\t${key}\n`
+    }
+  }
+  if (message) {destination.send(message)}
 }
 
 client.login(process.env.BOT_TOKEN);
