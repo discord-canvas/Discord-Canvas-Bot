@@ -1,26 +1,29 @@
 
 {
-  "101": {},
-  "105": {"alt_desc": "Programming Paradigms", "children": {
-    "1": {
-      "alt_desc": "Week 1 Homework Sheet: \nhttps://liverpool.instructure.com/courses/17018/files/1262772/download?wrap=1",
-      "children": {
-        "install-haskell": {"image": "questions/105.1.install-haskell.png"},
-        "launch-ghci": {"image": "questions/105.1.launch-ghci.png"},
-        "pure-functions": {
-          "image": "questions/105.1.pure-functions.png",
-          "children": {
-            "1": {"image": "questions/105.1.pure-functions.1.png"},
-            "2": {"image": "questions/105.1.pure-functions.2.png"},
-            "3": {"image": "questions/105.1.pure-functions.3.png"}
+  "alt_desc": "Uol Computer Science",
+  "children": {
+    "101": {},
+    "105": {"alt_desc": "Programming Paradigms", "image": "questions/105.1.pure-functions.2.png","children": {
+      "Week 1": {
+        "alt_desc": "Week 1 Homework Sheet: \nhttps://liverpool.instructure.com/courses/17018/files/1262772/download?wrap=1",
+        "children": {
+          "install-haskell": {"image": "questions/105.1.install-haskell.png"},
+          "launch-ghci": {"image": "questions/105.1.launch-ghci.png"},
+          "pure-functions": {
+            "image": "questions/105.1.pure-functions.png",
+            "children": {
+              "1": {"image": "questions/105.1.pure-functions.1.png"},
+              "2": {"image": "questions/105.1.pure-functions.2.png"},
+              "3": {"image": "questions/105.1.pure-functions.3.png"}
+            }
+            }
           }
-          }
-        }
-    },
-    "2": {},
-    "3": {},
-    "5": {}
-    }},
-  "109": {},
-  "111": {}
+      },
+      "Week 2": {},
+      "Week 3": {},
+      "Week 5": {}
+      }},
+    "109": {},
+    "111": {}
+  }
 }
