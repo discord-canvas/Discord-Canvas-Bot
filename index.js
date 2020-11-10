@@ -18,18 +18,20 @@ client.on('message', msg => {
 
   if (command === 'homework') {
     curr = homework
+    path = 'questions/' + args.join('.') + '.png'
     for (let i = 0; i < args.length; i++) {
       curr = curr.children[args[i].toLowerCase()]
-    }
 
-    sendNode(msg.channel, curr)
+    }
+    console.log(path);
+    sendNode(msg.channel, curr, path)
   }
 })
 
 
-function sendNode(destination, node) {
+function sendNode(destination, node, path) {
   if (node.image) {
-    image = fs.readFileSync(node.image)
+    image = fs.readFileSync(path)
     destination.send("", {files:[image]})
   }
 
