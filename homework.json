@@ -93,7 +93,16 @@
       "week-3": {
         "alt_desc": "Week 3 Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17018/files/1328701/download?wrap=1\nSolutions\n\thttps://liverpool.instructure.com/courses/17018/files/1323816/download?wrap=1",
         "image": true,
-        "children": {}
+        "children": {
+          "recursion": {
+            "children": {
+              "1": {"image": true},
+              "2": {"image": true},
+              "3": {"image": true},
+              "4": {"image": true},
+            }
+          }
+        }
       },
       "week-4": {"alt_desc": "There was no homework sheet in week 3, we started Assignment 1"},
       "week-5": {
