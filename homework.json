@@ -6,6 +6,7 @@
     "105": {"alt_desc": "Programming Paradigms", "children": {
       "week-1": {
         "alt_desc": "Week 1 Homework Sheet: \n\thttps://liverpool.instructure.com/courses/17018/files/1262772/download?wrap=1",
+        "image": true,
         "children": {
           "install-haskell": {"image": true},
           "launch-ghci": {"image": true},
@@ -89,9 +90,16 @@
           }
         }
       },
-      "week-3": {"alt_desc": "Week 3 Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17018/files/1328701/download?wrap=1\nSolutions\n\thttps://liverpool.instructure.com/courses/17018/files/1323816/download?wrap=1"},
+      "week-3": {
+        "alt_desc": "Week 3 Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17018/files/1328701/download?wrap=1\nSolutions\n\thttps://liverpool.instructure.com/courses/17018/files/1323816/download?wrap=1",
+        "image": true,
+        "children": {}
+      },
       "week-4": {"alt_desc": "There was no homework sheet in week 3, we started Assignment 1"},
-      "week-5": {"alt_desc": "Week 5 Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17018/files/1369140/download?wrap=1"}
+      "week-5": {
+        "alt_desc": "Week 5 Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17018/files/1369140/download?wrap=1",
+        "children": {}
+      }
       }},
     "109": {},
     "111": {}
