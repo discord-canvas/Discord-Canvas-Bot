@@ -99,15 +99,83 @@
               "1": {"image": true},
               "2": {"image": true},
               "3": {"image": true},
-              "4": {"image": true},
+              "4": {"image": true}
             }
-          }
+          },
+          "list-recursion": {
+            "1": {"image": true},
+            "2": {"image": true},
+            "3": {"image": true},
+            "4": {"image": true},
+            "5": {"image": true},
+            "6": {"image": true}
+          },
+          "more-complex-recursion-on-lists": {
+            "1": {"image": true},
+            "2": {"image": true},
+            "3": {"image": true}
+          },
+          "the-collatz-problem": {"image": true}
         }
       },
       "week-4": {"alt_desc": "There was no homework sheet in week 3, we started Assignment 1"},
       "week-5": {
         "alt_desc": "Week 5 Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17018/files/1369140/download?wrap=1",
-        "children": {}
+        "children": {
+          "partial-application": {
+            "image": true,
+            "children": {
+              "1": {"image": true},
+              "2": {"image": true},
+              "3": {"image": true},
+              "4": {"image": true},
+              "5": {"image": true}
+            }
+          },
+          "polymorphic-types": {
+            "image": true,
+            "children": {
+              "1": {"image": true},
+              "2": {"image": true},
+              "3": {"image": true},
+              "4": {"image": true}
+            }
+          },
+          "anonymous-functions": {
+            "image": true,
+            "children": {
+              "1": {"image": true},
+              "2": {"image": true},
+              "3": {"image": true},
+              "4": {"image": true}
+            }
+          },
+          "function-composition": {
+            "image": true,
+            "children": {
+              "1": {"image": true},
+              "2": {"image": true},
+              "3": {"image": true},
+              "4": {"image": true}
+            }
+          },
+          "map": {
+            "children": {
+              "1": {"image": true},
+              "2": {"image": true},
+              "3": {"image": true},
+              "4": {"image": true}
+            }
+          },
+          "filter": {
+            "children": {
+              "1": {"image": true},
+              "2": {"image": true},
+              "3": {"image": true},
+              "4": {"image": true}
+            }
+          }
+        }
       }
       }},
     "109": {},
