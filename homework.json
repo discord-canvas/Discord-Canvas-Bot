@@ -4,7 +4,7 @@
   "children": {
     "101": {},
     "105": {"alt_desc": "Programming Paradigms", "image": "questions/105.1.pure-functions.2.png","children": {
-      "Week 1": {
+      "week-1": {
         "alt_desc": "Week 1 Homework Sheet: \nhttps://liverpool.instructure.com/courses/17018/files/1262772/download?wrap=1",
         "children": {
           "install-haskell": {"image": "questions/105.1.install-haskell.png"},
@@ -16,12 +16,33 @@
               "2": {"image": "questions/105.1.pure-functions.2.png"},
               "3": {"image": "questions/105.1.pure-functions.3.png"}
             }
+          },
+          "getting-started-with-haskell": {
+            "children":{
+              "1": {"image": "questions/105.1.getting-started-with-haskell.1"},
+              "2": {"image": "questions/105.1.getting-started-with-haskell.2"},
+              "3": {"image": "questions/105.1.getting-started-with-haskell.3"},
+              "4": {"image": "questions/105.1.getting-started-with-haskell.4"},
+              "5": {"image": "questions/105.1.getting-started-with-haskell.5"},
+              "6": {"image": "questions/105.1.getting-started-with-haskell.6"},
+              "7": {"image": "questions/105.1.getting-started-with-haskell.7"},
+              "8": {
+                "image": "questions/105.1.getting-started-with-haskell.8",
+                "children": {
+                  "a": {"image": "questions/105.1.getting-started-with-haskell.8.a"},
+                  "b": {"image": "questions/105.1.getting-started-with-haskell.8.b"},
+                  "c": {"image": "questions/105.1.getting-started-with-haskell.8.c"},
+                  "d": {"image": "questions/105.1.getting-started-with-haskell.8.d"},
+                  "e": {"image": "questions/105.1.getting-started-with-haskell.8.e"}
+                }
+              }
             }
           }
+        }
       },
-      "Week 2": {},
-      "Week 3": {},
-      "Week 5": {}
+      "week-2": {},
+      "week-3": {},
+      "week-5": {}
       }},
     "109": {},
     "111": {}
