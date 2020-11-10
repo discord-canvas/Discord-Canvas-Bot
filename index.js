@@ -16,7 +16,7 @@ client.on('message', msg => {
   const args = msg.content.slice(prefix.length).trim().split(' ')
   const command = args.shift().toLowerCase()
 
-  if (command === 'homework') {
+  if (command === 'homework' || command === 'hw') {
     curr = homework
     path = 'questions/' + args.join('.') + '.png'
     for (let i = 0; i < args.length; i++) {
