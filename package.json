@@ -1,16 +1,26 @@
 {
-  "name": "homework-bot",
+  "name": "canvas-bot",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "npx eslint src *.js",
+    "init-db": "node ./scripts/initialize-database.js",
+    "init-config": "cp -i ./.config.example.json ./.config.json",
     "start": "node index.js"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "discord.js": "^12.4.1",
-    "dotenv": "^8.2.0"
-  },
+  "keywords": [],
+  "contributors": [
+    {
+      "name": "Cammy",
+      "url": "https://github.com/CammyFentreux"
+    },
+    {
+      "name": "Tom",
+      "url": "https://github.com/Douile"
+    }
+  ],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CammyFentreux/Discord-Homework-Bot.git"
@@ -19,5 +29,16 @@
     "url": "https://github.com/CammyFentreux/Discord-Homework-Bot/issues"
   },
   "homepage": "https://github.com/CammyFentreux/Discord-Homework-Bot#readme",
-  "description": ""
+  "dependencies": {
+    "discord.js-light": "^3.3.5",
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.1",
+    "sqlite3": "^5.0.0"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.2",
+    "erlpack": "github:discord/erlpack",
+    "utf-8-validate": "^5.0.3",
+    "zlib-sync": "^0.1.7"
+  }
 }
