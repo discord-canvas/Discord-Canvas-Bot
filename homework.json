@@ -2,7 +2,9 @@
 {
   "alt_desc": "Uol Computer Science",
   "children": {
-    "101": {},
+    "101": {
+      "alt_desc": "Introduction to Programming"
+    },
     "105": {
       "alt_desc": "Programming Paradigms\n\tContact: john.fearnley@liverpool.ac.uk",
       "children": {
@@ -314,7 +316,15 @@
           "children": {
             "1": {"image": true},
             "2": {"image": true},
-            "3": {"image": true},
+            "3": {
+              "image": true,
+              "children": {
+                "a": {"image": true},
+                "b": {"image": true},
+                "c": {"image": true},
+                "d": {"image": true}
+              }
+            },
             "4": {"image": true},
             "5": {"image": true},
             "6": {"image": true},
