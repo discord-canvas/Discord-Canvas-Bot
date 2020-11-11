@@ -182,11 +182,11 @@
       }
     },
     "109": {
-      "alt_desc": "Foundations of Computer Science\m\tContact: konev@liverpool.ac.uk",
+      "alt_desc": "Foundations of Computer Science\n\tContact: konev@liverpool.ac.uk",
       "children": {
         "1": {
           "image": true,
-          "alt_desc": "The pdf had a typo in it, 1.7 should be submitted.\n"
+          "alt_desc": "The pdf had a typo in it, 1.7 should be submitted.\nSolutions: https://liverpool.instructure.com/courses/27539/modules/items/289855",
           "children": {
             "1": {"image": true},
             "2": {"image": true},
@@ -199,6 +199,7 @@
         },
         "2": {
           "image": true,
+          "alt_desc": "Solutions: https://liverpool.instructure.com/courses/27539/modules/items/291523",
           "children": {
             "1": {"image": true},
             "2": {"image": true},
@@ -209,6 +210,7 @@
         },
         "3": {
           "image": true,
+          "alt_desc": "Solutions: https://liverpool.instructure.com/courses/27539/modules/items/296730",
           "children": {
             "1": {"image": true},
             "2": {
@@ -225,6 +227,7 @@
         },
         "4": {
           "image": true,
+          "alt_desc": "Solutions: https://liverpool.instructure.com/courses/27539/modules/items/301668",
           "children": {
             "1": {"image": true},
             "2": {"image": true},
@@ -292,8 +295,14 @@
           "image": true,
           "children": {
             "1": {"image": true},
-            "2": {"image": true},
-            "3": {"image": true},
+            "2": {
+              "image": true,
+              "alt_desc": "Link: https://www.bbc.co.uk/ontologies/sport"
+            },
+            "3": {
+              "image": true,
+              "alt_desc": "Link: https://www.bbc.co.uk/ontologies/sport"
+            },
             "4": {"image": true},
             "5": {"image": true},
             "6": {"image": true},
@@ -311,7 +320,7 @@
             "6": {"image": true},
             "7": {"image": true}
           }
-        },
+        }
       }
     }
   }
