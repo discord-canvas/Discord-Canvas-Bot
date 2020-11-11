@@ -17,21 +17,32 @@ client.on('message', msg => {
   const command = args.shift().toLowerCase()
 
   if (command === 'homework' || command === 'hw') {
-    curr = homework
-    path = 'questions/' + args.join('.') + '.png'
-    for (let i = 0; i < args.length; i++) {
-      curr = curr.children[args[i].toLowerCase()]
+    try {
+      curr = homework
+      path = 'questions/' + args.join('.')
 
+      for (let i = 0; i < args.length; i++) {
+        curr = curr.children[args[i].toLowerCase()]
+      }
+
+      console.log(`${msg.author.tag} requested ${path}`)
+      sendNode(msg.channel, curr, path)
+    } catch (err) {
+      switch (err.name) {
+        case 'TypeError':
+          msg.channel.send(`${path} is not a question I know about`)
+          break
+        default:
+          msg.channel.send('Unknown error detected, aborting operation.')
+      }
     }
-    console.log(path);
-    sendNode(msg.channel, curr, path)
   }
 })
 
 
 function sendNode(destination, node, path) {
   if (node.image) {
-    image = fs.readFileSync(path)
+    image = fs.readFileSync(path + '.png')
     destination.send("", {files:[image]})
   }
 
@@ -50,5 +61,6 @@ function sendNode(destination, node, path) {
 
 client.login(process.env.BOT_TOKEN);
 
-// TODO: Allow message to contain image id
+// TODO:
 // Add error catching for invalid ids
+// Add !help command
