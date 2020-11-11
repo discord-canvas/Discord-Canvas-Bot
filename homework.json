@@ -3,85 +3,238 @@
   "alt_desc": "Uol Computer Science",
   "children": {
     "101": {},
-    "105": {"alt_desc": "Programming Paradigms", "children": {
-      "week-1": {
-        "alt_desc": "Week 1 Homework Sheet: \n\thttps://liverpool.instructure.com/courses/17018/files/1262772/download?wrap=1",
-        "image": true,
-        "children": {
-          "install-haskell": {"image": true},
-          "launch-ghci": {"image": true},
-          "pure-functions": {
-            "image": true,
-            "children": {
+    "105": {
+      "alt_desc": "Programming Paradigms\n\tContact: john.fearnley@liverpool.ac.uk",
+      "children": {
+        "week-1": {
+          "alt_desc": "Week 1 Homework Sheet: \n\thttps://liverpool.instructure.com/courses/17018/files/1262772/download?wrap=1",
+          "image": true,
+          "children": {
+            "install-haskell": {"image": true},
+            "launch-ghci": {"image": true},
+            "pure-functions": {
+              "image": true,
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true}
+              }
+            },
+            "getting-started-with-haskell": {
+              "children":{
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true},
+                "4": {"image": true},
+                "5": {"image": true},
+                "6": {"image": true},
+                "7": {"image": true},
+                "8": {
+                  "image": true,
+                  "children": {
+                    "a": {"image": true},
+                    "b": {"image": true},
+                    "c": {"image": true},
+                    "d": {"image": true},
+                    "e": {"image": true}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "week-2": {
+          "alt_desc": "Week 2 Homework Sheet: \n\thttps://liverpool.instructure.com/courses/17018/files/1289791/download?wrap=1\nSolutions\n\thttps://liverpool.instructure.com/courses/17018/files/1280750/download?wrap=1",
+          "children": {
+            "ifs": {
               "1": {"image": true},
               "2": {"image": true},
               "3": {"image": true}
+            },
+            "let-expressions": {
+              "image": true,
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true}
+              }
+            },
+            "tuples": {
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true}
+              }
+            },
+            "lists": {
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true},
+                "4": {"image": true}
+              }
+            },
+            "list-ranges": {
+              "image": true,
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true},
+                "4": {"image": true}
+              }
+            },
+            "list-comprehensions": {
+              "1": {"image": true},
+              "2": {"image": true},
+              "3": {"image": true},
+              "4": {"image": true},
+              "5": {"image": true}
             }
-          },
-          "getting-started-with-haskell": {
-            "children":{
+          }
+        },
+        "week-3": {
+          "alt_desc": "Week 3 Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17018/files/1328701/download?wrap=1\nSolutions\n\thttps://liverpool.instructure.com/courses/17018/files/1323816/download?wrap=1",
+          "image": true,
+          "children": {
+            "recursion": {
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true},
+                "4": {"image": true}
+              }
+            },
+            "list-recursion": {
               "1": {"image": true},
               "2": {"image": true},
               "3": {"image": true},
               "4": {"image": true},
               "5": {"image": true},
-              "6": {"image": true},
-              "7": {"image": true},
-              "8": {
-                "image": true,
-                "children": {
-                  "a": {"image": true},
-                  "b": {"image": true},
-                  "c": {"image": true},
-                  "d": {"image": true},
-                  "e": {"image": true}
-                }
+              "6": {"image": true}
+            },
+            "more-complex-recursion-on-lists": {
+              "1": {"image": true},
+              "2": {"image": true},
+              "3": {"image": true}
+            },
+            "the-collatz-problem": {"image": true}
+          }
+        },
+        "week-4": {"alt_desc": "There was no homework sheet in week 3, we started Assignment 1"},
+        "week-5": {
+          "alt_desc": "Week 5 Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17018/files/1369140/download?wrap=1",
+          "children": {
+            "partial-application": {
+              "image": true,
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true},
+                "4": {"image": true},
+                "5": {"image": true}
+              }
+            },
+            "polymorphic-types": {
+              "image": true,
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true},
+                "4": {"image": true}
+              }
+            },
+            "anonymous-functions": {
+              "image": true,
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true},
+                "4": {"image": true}
+              }
+            },
+            "function-composition": {
+              "image": true,
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true},
+                "4": {"image": true}
+              }
+            },
+            "map": {
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true},
+                "4": {"image": true}
+              }
+            },
+            "filter": {
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true},
+                "4": {"image": true}
               }
             }
           }
         }
-      },
-      "week-2": {
-        "alt_desc": "Week 2 Homework Sheet: \n\thttps://liverpool.instructure.com/courses/17018/files/1289791/download?wrap=1\nSolutions\n\thttps://liverpool.instructure.com/courses/17018/files/1280750/download?wrap=1",
-        "children": {
-          "ifs": {
+      }
+    },
+    "109": {
+      "alt_desc": "Foundations of Computer Science\m\tContact: konev@liverpool.ac.uk",
+      "children": {
+        "1": {
+          "image": true,
+          "alt_desc": "The pdf had a typo in it, 1.7 should be submitted.\n"
+          "children": {
             "1": {"image": true},
             "2": {"image": true},
-            "3": {"image": true}
-          },
-          "let-expressions": {
-            "image": true,
-            "children": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true}
+            "3": {"image": true},
+            "4": {"image": true},
+            "5": {"image": true},
+            "6": {"image": true},
+            "7": {"image": true}
+          }
+        },
+        "2": {
+          "image": true,
+          "children": {
+            "1": {"image": true},
+            "2": {"image": true},
+            "3": {"image": true},
+            "4": {"image": true},
+            "5": {"image": true}
+          }
+        },
+        "3": {
+          "image": true,
+          "children": {
+            "1": {"image": true},
+            "2": {
+              "image": true,
+              "alt_desc": "Typo: This should be `for any *irrational* numbers r and s`"
+            },
+            "3": {"image": true},
+            "4": {"image": true},
+            "5": {
+              "image": true,
+              "alt_desc": "The fabled horse question. Run away while you still can. \nPreferably not on horseback."
             }
-          },
-          "tuples": {
-            "children": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true}
-            }
-          },
-          "lists": {
-            "children": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true},
-              "4": {"image": true}
-            }
-          },
-          "list-ranges": {
-            "image": true,
-            "children": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true},
-              "4": {"image": true}
-            }
-          },
-          "list-comprehensions": {
+          }
+        },
+        "4": {
+          "image": true,
+          "children": {
+            "1": {"image": true},
+            "2": {"image": true},
+            "3": {"image": true},
+            "4": {"image": true}
+          }
+        },
+        "5": {
+          "image": true,
+          "children": {
             "1": {"image": true},
             "2": {"image": true},
             "3": {"image": true},
@@ -89,96 +242,77 @@
             "5": {"image": true}
           }
         }
-      },
-      "week-3": {
-        "alt_desc": "Week 3 Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17018/files/1328701/download?wrap=1\nSolutions\n\thttps://liverpool.instructure.com/courses/17018/files/1323816/download?wrap=1",
-        "image": true,
-        "children": {
-          "recursion": {
-            "children": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true},
-              "4": {"image": true}
-            }
-          },
-          "list-recursion": {
+      }
+    },
+    "111": {
+      "alt_desc": "Introduction to Artificial Intelligencen\n\tContact: wolter@liverpool.ac.uk",
+      "children": {
+        "1": {
+          "image": true,
+          "children": {
             "1": {"image": true},
             "2": {"image": true},
             "3": {"image": true},
             "4": {"image": true},
             "5": {"image": true},
             "6": {"image": true}
-          },
-          "more-complex-recursion-on-lists": {
+          }
+        },
+        "2": {
+          "image": true,
+          "children": {
             "1": {"image": true},
             "2": {"image": true},
-            "3": {"image": true}
-          },
-          "the-collatz-problem": {"image": true}
-        }
-      },
-      "week-4": {"alt_desc": "There was no homework sheet in week 3, we started Assignment 1"},
-      "week-5": {
-        "alt_desc": "Week 5 Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17018/files/1369140/download?wrap=1",
-        "children": {
-          "partial-application": {
-            "image": true,
-            "children": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true},
-              "4": {"image": true},
-              "5": {"image": true}
-            }
-          },
-          "polymorphic-types": {
-            "image": true,
-            "children": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true},
-              "4": {"image": true}
-            }
-          },
-          "anonymous-functions": {
-            "image": true,
-            "children": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true},
-              "4": {"image": true}
-            }
-          },
-          "function-composition": {
-            "image": true,
-            "children": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true},
-              "4": {"image": true}
-            }
-          },
-          "map": {
-            "children": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true},
-              "4": {"image": true}
-            }
-          },
-          "filter": {
-            "children": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true},
-              "4": {"image": true}
-            }
+            "3": {"image": true},
+            "4": {"image": true},
+            "5": {"image": true},
+            "6": {"image": true},
+            "7": {"image": true},
+            "8": {"image": true},
+            "9": {"image": true},
+            "10": {"image": true},
+            "11": {"image": true},
+            "12": {"image": true},
+            "13": {"image": true}
           }
-        }
+        },
+        "3": {
+          "image": true,
+          "children": {
+            "1": {"image": true},
+            "2": {"image": true},
+            "3": {"image": true},
+            "4": {"image": true},
+            "5": {"image": true},
+            "6": {"image": true},
+            "7": {"image": true}
+          }
+        },
+        "4": {
+          "image": true,
+          "children": {
+            "1": {"image": true},
+            "2": {"image": true},
+            "3": {"image": true},
+            "4": {"image": true},
+            "5": {"image": true},
+            "6": {"image": true},
+            "7": {"image": true}
+          }
+        },
+        "5": {
+          "image": true,
+          "children": {
+            "1": {"image": true},
+            "2": {"image": true},
+            "3": {"image": true},
+            "4": {"image": true},
+            "5": {"image": true},
+            "6": {"image": true},
+            "7": {"image": true}
+          }
+        },
       }
-      }},
-    "109": {},
-    "111": {}
+    }
   }
 }
