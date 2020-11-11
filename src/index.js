@@ -5,6 +5,7 @@ const { Client } = require('discord.js-light');
 const sqlite3 = require('sqlite3');
 
 const Canvas = require('./canvas.js');
+const CanvasUtils = require('./canvasutils.js');
 const { asyncWrap } = require('./utils.js');
 const { BOT_PERMISSIONS, BOT_PRESENCE, DB_NAME } = require('./constants.js');
 const { setCanvasUtilsClient } = require('./canvasutils.js');
@@ -95,6 +96,8 @@ module.exports = async function(botToken, canvasToken, config) {
   const db = new sqlite3.Database(DB_NAME, sqlite3.OPEN_READWRITE);
   await awaitOpen(db);
   db.on('error', console.error);
+  const canvas = new Canvas(canvasToken, config);
+  const canvasUtils = new CanvasUtils(canvas, config.overrides);
   Object.defineProperties(client, {
     config: {
       configurable: false,
@@ -106,7 +109,13 @@ module.exports = async function(botToken, canvasToken, config) {
       configurable: false,
       enumerable: false,
       writable: false,
-      value: new Canvas(canvasToken, config)
+      value: canvas
+    },
+    canvasUtils: {
+      configurable: false,
+      enumerable: false,
+      writable: false,
+      value: canvasUtils
     },
     db: {
       configurable: false,
@@ -122,7 +131,6 @@ module.exports = async function(botToken, canvasToken, config) {
     }
   });
   await loadCommands();
-  setCanvasUtilsClient(client);
   await client.login(botToken);
   return client;
 }
