@@ -2,7 +2,9 @@
 {
   "alt_desc": "Uol Computer Science",
   "children": {
-    "101": {},
+    "101": {
+      "alt_desc"; "Introduction to Programming"
+    },
     "105": {
       "alt_desc": "Programming Paradigms\n\tContact: john.fearnley@liverpool.ac.uk",
       "children": {
