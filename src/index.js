@@ -3,10 +3,15 @@
 const fs = require('fs').promises;
 const { Client } = require('discord.js-light');
 const sqlite3 = require('sqlite3');
+
 const Canvas = require('./canvas.js');
 const { asyncWrap } = require('./utils.js');
 const { BOT_PERMISSIONS, BOT_PRESENCE, DB_NAME } = require('./constants.js');
 const { setCanvasUtilsClient } = require('./canvasutils.js');
+
+/*******************************************************************************
+*** Create bot instance
+*******************************************************************************/
 
 const client = new Client({
   cacheGuilds: false,
@@ -17,6 +22,10 @@ const client = new Client({
 	cachePresences: false,
   presence: BOT_PRESENCE
 });
+
+/*******************************************************************************
+*** Setup commands
+*******************************************************************************/
 
 async function loadCommand(file) {
   const command = require(`./commands/${file}`);
@@ -33,6 +42,10 @@ async function loadCommands() {
   const files = await fs.readdir(`${__dirname}/commands`);
   await Promise.all(files.map(loadCommand));
 }
+
+/*******************************************************************************
+*** Event handlers
+*******************************************************************************/
 
 client.on('ready', function() {
   console.log(`Logged in as ${client.user.username}`);
@@ -66,6 +79,10 @@ client.on('message', asyncWrap(async function(message) {
 client.on('close', function() {
   client.db.close();
 })
+
+/*******************************************************************************
+*** Startup the bot
+*******************************************************************************/
 
 function awaitOpen(database) {
   return new Promise((resolve, reject) => {
