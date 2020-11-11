@@ -1,3 +1,5 @@
+'use strict';
+
 const MS_DAY = 1000 * 60 * 60 * 24;
 const MS_WEEK = MS_DAY*7;
 
