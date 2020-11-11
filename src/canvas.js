@@ -2,8 +2,8 @@ const fetch = require("node-fetch");
 
 const PAGE_LENGTH = 50;
 
-const RE_LINKURL = /\<([^\>]+)\>/g;
-const RE_LINKREL = /rel=\"([^"]+)\"/g;
+const RE_LINKURL = /<([^>]+)>/g;
+const RE_LINKREL = /rel="([^"]+)"/g;
 
 let bucket = { remaining: undefined };
 
@@ -47,7 +47,7 @@ const req = Object.freeze({
 
 function parseLinks(linkString) {
   let links = {}, linkStrings = linkString.split(',');
-  for (link of linkStrings) {
+  for (let link of linkStrings) {
     let [ url, rel ] = link.split(';');
     RE_LINKURL.lastIndex = 0;
     let urlMatch = RE_LINKURL.exec(url);
@@ -81,7 +81,6 @@ class Canvas {
 
   async getFilteredCourses() {
     const courses = await this.getCourses();
-    const filter = this.courseFilter;
     let res = {};
     for (let course of courses) {
       const match = Array.from(course.name.matchAll(this.courseFilter));

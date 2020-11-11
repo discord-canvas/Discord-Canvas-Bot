@@ -58,7 +58,7 @@ const parseAssignmentOverrides = exports.parseAssignmentOverrides = function(sta
   });
 }
 
-const generateAssignmentsEmbed = exports.generateAssignmentsEmbed = async function(offset) {
+exports.generateAssignmentsEmbed = async function(offset) {
   const { courses, assignments, weekTimes } = await getWeeksAssignments(offset);
   const startDate = new Date();
   startDate.setTime(weekTimes.start);

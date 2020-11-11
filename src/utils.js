@@ -9,7 +9,7 @@ exports.getWeekTimes = function(offset) {
   start.setUTCHours(0);
   start = start.getTime() - ((start.getDay()-1) * MS_DAY);
   if (!isNaN(offset)) start += MS_WEEK*offset;
-  end = start + (MS_WEEK);
+  let end = start + (MS_WEEK);
   return { start, end };
 }
 
