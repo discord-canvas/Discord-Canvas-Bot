@@ -27,11 +27,11 @@ class CanvasUtils {
 
   async getCoursesAndAssignmentsCached() {
     const now = performance.now();
-    if (isNaN(LAST_UPDATE) || CACHE === undefined || now - LAST_UPDATE >= UPDATE_TIME) {
-      CACHE = await this.getCoursesAndAssignments();
-      LAST_UPDATE = now;
+    if (isNaN(this.lastUpdate) || this.cache === undefined || now - this.lastUpdate >= UPDATE_TIME) {
+      this.cache = await this.getCoursesAndAssignments();
+      this.lastUpdate = now;
     }
-    return CACHE;
+    return this.cache;
   }
 
   async getWeeksAssignments(offset) {
@@ -79,6 +79,7 @@ class CanvasUtils {
         }
       })
     };
+  }
 }
 
 module.exports = CanvasUtils;
