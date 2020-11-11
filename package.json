@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/CammyFentreux/Discord-Homework-Bot#readme",
   "dependencies": {
+    "@douile/bot-utilities": "^1.1.0",
     "discord.js-light": "^3.3.5",
     "dotenv": "^8.2.0",
     "node-fetch": "^2.6.1",

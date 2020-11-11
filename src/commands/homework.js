@@ -32,3 +32,4 @@ const call = async function(msg, args) {
 
 exports.name = ['homework','hw'];
 exports.call = call;
+exports.help = 'Output homework questions to discord';

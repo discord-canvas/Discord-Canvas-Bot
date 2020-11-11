@@ -9,3 +9,4 @@ async function call(message) {
 
 exports.name = 'nextweek';
 exports.call = call;
+exports.help = 'Output assignments due next week';
