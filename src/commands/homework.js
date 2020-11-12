@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-const { sendNode } = require('../homeworkutils.js');
+const { sendNode, sendImage } = require('../homeworkutils.js');
 
 const homework = JSON.parse(fs.readFileSync('homework.json'));
 
@@ -54,23 +54,27 @@ const call = async function (msg, args) {
   }
 }
 
-function travelTree(curr, args, path, destination) {
+async function travelTree(curr, args, path, destination) {
   // check for and handle branching arg
   if (args[0].includes(',')) {
     [args[0], ...branches] = args.shift().split(',')
     for (branch of branches) {
-      sendNode(destination, curr.children[branch], `${path}${branch}`)
+      await sendNode(destination, curr.children[branch], `${path}${branch}`)
     }
-  } else if (args[0] == '*') {
+  // check for wildcard operator
+  } else if (args[0] == '*') {  // potential for misuse
     for ([name, child] of Object.entries(curr.children).sort((a,b) =>  ''+a[0].localeCompare(b[0]))) {
-      sendNode(destination, child, `${path}${name}`)
+      // if (child.children) {continue}  // prevents spam by skipping children with children
+      if (child.image) {
+        await sendImage(destination, `${path}${name}`)
+      }
     }
     return
   }
 
   // base case
   if (args.length == 1) {
-    sendNode(destination, curr.children[args[0]], `${path}${args[0]}`)
+    await sendNode(destination, curr.children[args[0]], `${path}${args[0]}`)
     return
   }
 
