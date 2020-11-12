@@ -57,8 +57,10 @@ const call = async function (msg, args) {
 function travelTree(curr, args, path, destination) {
   // check for and handle branching arg
   if (args[0].includes(',')) {
-    [args[0], branch] = args.shift().split(',')
-    sendNode(destination, curr.children[branch], `${path}${branch}`)
+    [args[0], ...branches] = args.shift().split(',')
+    for (branch of branches) {
+      sendNode(destination, curr.children[branch], `${path}${branch}`)
+    }
   }
 
   // base case
