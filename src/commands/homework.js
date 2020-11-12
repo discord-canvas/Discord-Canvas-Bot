@@ -61,6 +61,11 @@ function travelTree(curr, args, path, destination) {
     for (branch of branches) {
       sendNode(destination, curr.children[branch], `${path}${branch}`)
     }
+  } else if (args[0] == '*') {
+    for ([name, child] of Object.entries(curr.children)) {
+      sendNode(destination, child, `${path}${name}`)
+    }
+    return
   }
 
   // base case
