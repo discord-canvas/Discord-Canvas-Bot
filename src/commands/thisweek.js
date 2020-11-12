@@ -1,9 +1,7 @@
 'use strict';
 
-const { generateAssignmentsEmbed } = require('../canvasutils.js');
-
 async function call(message) {
-  const embed = await generateAssignmentsEmbed();
+  const embed = await message.client.canvasUtils.generateAssignmentsEmbed();
   await message.channel.send({ embed });
 }
 
