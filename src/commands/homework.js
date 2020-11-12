@@ -64,7 +64,6 @@ async function travelTree(curr, args, path, destination) {
   // check for wildcard operator
   } else if (args[0] == '*') {  // potential for misuse
     for ([name, child] of Object.entries(curr.children).sort((a,b) =>  ''+a[0].localeCompare(b[0]))) {
-      // if (child.children) {continue}  // prevents spam by skipping children with children
       if (child.image) {
         await sendImage(destination, `${path}${name}`)
       }
