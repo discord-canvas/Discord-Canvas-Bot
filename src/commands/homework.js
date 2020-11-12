@@ -62,7 +62,7 @@ function travelTree(curr, args, path, destination) {
       sendNode(destination, curr.children[branch], `${path}${branch}`)
     }
   } else if (args[0] == '*') {
-    for ([name, child] of Object.entries(curr.children)) {
+    for ([name, child] of Object.entries(curr.children).sort((a,b) =>  ''+a[0].localeCompare(b[0]))) {
       sendNode(destination, child, `${path}${name}`)
     }
     return
