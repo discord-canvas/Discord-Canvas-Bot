@@ -2,11 +2,15 @@
 
 const fs = require('fs').promises;
 
-exports.sendNode = async function(destination, node, path) {
+exports.sendImage = async (destination, path) => {
+  image = await fs.readFile(path + '.png')
+  destination.send('', {files:[image]})
+}
+
+exports.sendNode = async (destination, node, path) => {
   // sends all relevent information about a homework node
   if (node.image) {
-    image = await fs.readFile(path + '.png')
-    destination.send("", {files:[image]})
+    exports.sendImage(destination, path)
   }
 
   message = ''  // collates messages into one rather than sending many
