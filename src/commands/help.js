@@ -22,7 +22,7 @@ const call = async function(message, parts) {
       fields: Array.from(message.client.commands.entries())
         .filter(cmd =>
           (isOfBaseType(cmd[1].check, Function) ? cmd[1].check(message) : true) &&
-          cmd[0] === cmd[1].name
+          cmd[0] === cmd[1].name[0]
         )
         .map(cmd => {
           return {
@@ -38,8 +38,9 @@ const call = async function(message, parts) {
       color: EMBED_COLOR,
       fields: Array.from(message.client.commands.entries())
         .filter(cmd =>
-          matchAny(`${message.client.config.prefix}${cmd[0]}`, search) && (isOfBaseType(cmd[1].check, Function) ? cmd[1].check(message) : true) &&
-          cmd[0] === cmd[1].name
+          cmd[1].name.some(c => matchAny(`${message.client.config.prefix}${c}`, search)) &&
+          (isOfBaseType(cmd[1].check, Function) ? cmd[1].check(message) : true) &&
+          cmd[0] === cmd[1].name[0]
         )
         .map(cmd => {
           return {
