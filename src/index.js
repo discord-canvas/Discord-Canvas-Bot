@@ -77,8 +77,11 @@ client.on('message', asyncWrap(async function(message) {
   }
 }));
 
-client.on('close', function() {
-  client.db.close();
+client.once('close', function() {
+  client.db.close(function(err) {
+    if (err) console.error(err);
+    process.exit(0);
+  });
 })
 
 /*******************************************************************************
