@@ -47,7 +47,7 @@ function doNpmInstall() {
       stdio: ['ignore', 'inherit', 'inherit'],
       shell: false
     });
-    npm.on('exit', function(exitCode, signal) {
+    npm.once('exit', function(exitCode, signal) {
       if (exitCode === 0) return resolve(exitCode);
       reject(exitCode, signal);
     })
