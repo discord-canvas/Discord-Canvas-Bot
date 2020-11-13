@@ -1,10 +1,7 @@
 'use strict';
 
-async function call(message) {
-  const embed = await message.client.canvasUtils.generateAssignmentsEmbed();
-  await message.channel.send({ embed });
-}
+const { upcomingAssignments } = require('./templates/assignments.js');
 
 exports.name = 'thisweek';
-exports.call = call;
-exports.help = 'Output assignments due this week';
+exports.call = upcomingAssignments();
+exports.help = 'Output assignments due next week\n`!thisweek [filter]` e.g. `!thisweek 105`';;
