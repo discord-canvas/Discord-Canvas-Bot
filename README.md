@@ -39,6 +39,46 @@ Configuration of the bot is done in the `.config.json` file, there is an example
 }
 ```
 
+### Setting up questions
+In order to use `!hw` you will need to do two things: add screenshots of the questions to the `questions/` directory (the directory will soon be configurable) and create a JSON tree in `homework.json`.
+
+#### Screenshots
+While not directly required, you can alternatively add textual representations contained entirely in `homework.json`, if you do wish to add screenshots then this can be done by placing `.png` files into the `questions/` directory. Files must be named to match their equivalent path in `homework.json`, explained below. The `questions/` directory should not contain sub directories of screenshots, as they will be missed by the code. An example file name:
+`111.1.1.a`
+This corresponds to the question 1a of exercise 1 from module 111. To represent this in `homework.json`:
+
+#### The JSON Tree
+`homework.json` contains a nested structure of nodes, each representing a path that can be taken from the parent node. Usual tree stuff. Each node takes the form:
+```haskell
+data HomeworkNode = HomeworkNode {
+  alt_desc :: String,
+  image :: Bool,
+  children :: {HomeworkNode}
+}
+```
+If any field is empty, it will not be sent. For example, if we have the JSON: 
+```json
+{
+  "children": {
+    "1": {
+      "alt_desc": "Example 1",
+      "image": true,
+      "children": {
+        "a": {
+          "image": true
+        },
+        "b": {
+          "alt_desc": "Example 1b: What is the meaning of life?"
+        }
+      }
+    }
+  }
+}
+ ```
+If we call `!hw 1` we get a message containing "Example 1", the image called "1.png", and a list of sub-section names, "Subs: a, b".
+If we call `!hw 1 a` we get a message containing only the image called "1.a.png", since that node has not `alt_desc` or `children` properties.
+If we call `!hw 1 b` we get a message containing only "Example 1b: What is the meaning of life?", since that node only has an `alt_desc`.
+
 ## How to run
 The bot requires 2 API keys, for canvas and discord. These are set via environment variables (you can also use dotenv).
 ```
