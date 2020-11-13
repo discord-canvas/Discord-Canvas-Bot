@@ -1,6 +1,6 @@
 
 {
-  "alt_desc": "Uol Computer Science",
+  "alt_desc": "Uol Computer Science.\nUse `!help hw` to get usage information.",
   "children": {
     "101": {
       "alt_desc": "Introduction to Programming"

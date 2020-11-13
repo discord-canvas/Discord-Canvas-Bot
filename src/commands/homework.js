@@ -8,8 +8,12 @@ const homework = JSON.parse(fs.readFileSync('homework.json'))
 
 const call = async function (msg, args) {
   try {
-    args = args.map((arg) => arg.toLowerCase())
-    await travelTree(homework, args, 'questions/', msg.channel)
+    if (args.length == 0) {
+      await sendNode(msg.channel, homework)
+    } else {
+      args = args.map((arg) => arg.toLowerCase())
+      await travelTree(homework, args, 'questions/', msg.channel)
+    }
   } catch (err) {
     switch (err.name) {
       case 'TypeError':
