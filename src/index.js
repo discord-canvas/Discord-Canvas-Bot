@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3');
 
 const Canvas = require('./canvas.js');
 const CanvasUtils = require('./canvasutils.js');
-const { asyncWrap } = require('./utils.js');
+const { asyncWrap, unwrapSync, ipcSend } = require('./utils.js');
 const { BOT_PERMISSIONS, BOT_PRESENCE, DB_NAME } = require('./constants.js');
 
 /*******************************************************************************
@@ -48,6 +48,7 @@ async function loadCommands() {
 *******************************************************************************/
 
 client.on('ready', function() {
+  ipcSend({ t: 'ready', id: client.user.id }).then(null,console.error);
   console.log(`Logged in as ${client.user.username}`);
   client.generateInvite({permissions:BOT_PERMISSIONS}).then(link => console.log(`Invite link ${link}`), console.error);
 });
@@ -63,7 +64,7 @@ client.on('message', asyncWrap(async function(message) {
 
     const cmd = client.commands.get(command);
 
-    if (!(cmd.check instanceof Function) || cmd.check(message)) {
+    if (!(cmd.check instanceof Function) || (await unwrapSync(cmd.check(message))) === true) {
       try {
         await cmd.call(message, parts);
       } catch(e) {
@@ -76,8 +77,11 @@ client.on('message', asyncWrap(async function(message) {
   }
 }));
 
-client.on('close', function() {
-  client.db.close();
+client.once('close', function() {
+  client.db.close(function(err) {
+    if (err) console.error(err);
+    process.exit(0);
+  });
 })
 
 /*******************************************************************************
@@ -91,7 +95,7 @@ function awaitOpen(database) {
   });
 }
 
-module.exports = async function(botToken, canvasToken, config) {
+const startBot = module.exports = async function(botToken, canvasToken, config) {
   const db = new sqlite3.Database(DB_NAME, sqlite3.OPEN_READWRITE);
   await awaitOpen(db);
   db.on('error', console.error);
@@ -132,4 +136,40 @@ module.exports = async function(botToken, canvasToken, config) {
   await loadCommands();
   await client.login(botToken);
   return client;
+}
+
+/*******************************************************************************
+*** IPC handlers
+*******************************************************************************/
+
+process.on('message', asyncWrap(async function(message) {
+  switch(message.t) {
+    case 'edit': {
+      await client.channels.forge(message.chan).messages.forge(message.msg).edit(message.content);
+      break;
+    }
+    case 'close': {
+      client.destroy();
+      client.db.close(function(err) {
+        if (err) console.error(err);
+        process.exit(0);
+      });
+      break;
+    }
+  }
+}));
+
+/*******************************************************************************
+*** Startup
+*******************************************************************************/
+
+if (require.main === module) {
+  const DISCORD_TOKEN = process.env.DISCORD_TOKEN || process.env.BOT_TOKEN || '';
+  const CANVAS_TOKEN = process.env.CANVAS_TOKEN || '';
+  const CONFIG = require('../.config.json');
+
+  startBot(DISCORD_TOKEN, CANVAS_TOKEN, CONFIG).then(null, function() {
+    console.error.apply(this, arguments);
+    process.exit(1);
+  });
 }

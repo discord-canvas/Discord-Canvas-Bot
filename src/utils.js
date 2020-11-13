@@ -39,3 +39,30 @@ exports.asyncWrap = function(asyncFunction, onError) {
     asyncFunction.apply(this, arguments).then(null, error);
   }
 }
+
+/**
+* Check if a value is a promise, if it is await it
+* @param {*} res - value to check
+* @retuns {*}
+*/
+exports.unwrapSync = async function(res) {
+  if (res instanceof Promise) {
+    res = await res;
+  }
+  return res;
+}
+
+/**
+* Send a message via ipc
+* @async
+* @param {Object} message - Data to send
+*/
+exports.ipcSend = function(message) {
+  if (process.send === undefined) return Promise.resolve();
+  return new Promise((resolve,reject) => {
+    process.send(message, function(err) {
+      if (err !== null) return reject(err);
+      resolve();
+    });
+  })
+}
