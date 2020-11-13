@@ -10,3 +10,5 @@ exports.BOT_PERMISSIONS = Object.freeze([
 exports.BOT_PRESENCE = Object.freeze({ status: 'online', activity: { type: 'WATCHING', name: 'canvas' }});
 
 exports.DB_NAME = '.store.db';
+
+exports.EMBED_COLOR = 0xff0000;
