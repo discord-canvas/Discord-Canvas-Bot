@@ -2,12 +2,14 @@
 
 require('dotenv').config();
 
-const DISCORD_TOKEN = process.env.DISCORD_TOKEN || process.env.BOT_TOKEN || '';
-const CANVAS_TOKEN = process.env.CANVAS_TOKEN || '';
-const CONFIG = require('./.config.json');
+const { spawn } = require('child_process');
 
-const startBot = require('./src/index.js');
-startBot(DISCORD_TOKEN, CANVAS_TOKEN, CONFIG).then(null, function() {
-  console.error.apply(this, arguments);
-  process.exit(1);
+const child = spawn(process.argv0, [`${__dirname}/src/index.js`], {
+  cwd: __dirname,
+  env: process.env,
+  stdio: ['ignore', 'inherit', 'inherit', 'ipc'],
+  serialization: 'json',
+  shell: false,
 });
+
+child.on('message', console.log);

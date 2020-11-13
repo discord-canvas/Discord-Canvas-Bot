@@ -43,11 +43,19 @@ async function loadCommands() {
   await Promise.all(files.map(loadCommand));
 }
 
+function ipcSend(message) {
+  if (process.send === undefined) return Promise.resolve();
+  return new Promise((resolve) => {
+    process.send(message, resolve);
+  })
+}
+
 /*******************************************************************************
 *** Event handlers
 *******************************************************************************/
 
 client.on('ready', function() {
+  ipcSend({ t: 'ready', id: client.user.id });
   console.log(`Logged in as ${client.user.username}`);
   client.generateInvite({permissions:BOT_PERMISSIONS}).then(link => console.log(`Invite link ${link}`), console.error);
 });
@@ -91,7 +99,7 @@ function awaitOpen(database) {
   });
 }
 
-module.exports = async function(botToken, canvasToken, config) {
+const startBot = module.exports = async function(botToken, canvasToken, config) {
   const db = new sqlite3.Database(DB_NAME, sqlite3.OPEN_READWRITE);
   await awaitOpen(db);
   db.on('error', console.error);
@@ -132,4 +140,19 @@ module.exports = async function(botToken, canvasToken, config) {
   await loadCommands();
   await client.login(botToken);
   return client;
+}
+
+/*******************************************************************************
+*** Startup
+*******************************************************************************/
+
+if (require.main === module) {
+  const DISCORD_TOKEN = process.env.DISCORD_TOKEN || process.env.BOT_TOKEN || '';
+  const CANVAS_TOKEN = process.env.CANVAS_TOKEN || '';
+  const CONFIG = require('../.config.json');
+
+  startBot(DISCORD_TOKEN, CANVAS_TOKEN, CONFIG).then(null, function() {
+    console.error.apply(this, arguments);
+    process.exit(1);
+  });
 }
