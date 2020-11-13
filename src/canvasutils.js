@@ -62,22 +62,27 @@ class CanvasUtils {
     });
   }
 
-  async generateAssignmentsEmbed(offset) {
+  async generateAssignmentsEmbed(offset, filter) {
     const { courses, assignments, weekTimes } = await this.getWeeksAssignments(offset);
     const startDate = new Date();
     startDate.setTime(weekTimes.start);
+    let fields = assignments.map(a => {
+      return {
+        name: courses[a.course],
+        value: `[${a.name}](${a.url})\nDue: ${a.dueDate.toUTCString()}\nPoints: ${a.points}`,
+        inline: false
+      }
+    });
+    if (filter !== undefined) {
+      let reFilter = new RegExp(filter, 'gi');
+      fields = fields.filter(field => field.name.match(reFilter) !== null);
+    }
     return {
       title: 'Upcoming assignments',
       color: 0xff0000,
       footer: { text: 'Week starting' },
       timestamp: startDate.toISOString(),
-      fields: assignments.map(a => {
-        return {
-          name: courses[a.course],
-          value: `[${a.name}](${a.url})\nDue: ${a.dueDate.toUTCString()}\nPoints: ${a.points}`,
-          inline: false
-        }
-      })
+      fields
     };
   }
 }
