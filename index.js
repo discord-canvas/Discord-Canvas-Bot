@@ -52,9 +52,6 @@ function start() {
   child.on('message', function(message) {
     events.emit(message.t, child, message);
   });
-  events.on('ready', (child, message) => {
-    console.log(message);
-  });
   events.on('update', asyncWrap(doUpdate) );
   events.on('send', function(message) {
     child.send(message);
