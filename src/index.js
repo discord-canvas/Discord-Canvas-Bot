@@ -139,9 +139,19 @@ const startBot = module.exports = async function(botToken, canvasToken, config) 
 *** IPC handlers
 *******************************************************************************/
 
-process.on('message', function(message, sendHandle) {
+process.on('message', asyncWrap(async function(message) {
   console.log(message);
-})
+  switch(message.t) {
+    case 'edit': {
+      await client.channels.forge(message.chan).messages.forge(message.msg).edit(message.content);
+      break;
+    }
+    case 'close': {
+      client.destroy();
+      break;
+    }
+  }
+}));
 
 /*******************************************************************************
 *** Startup
