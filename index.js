@@ -5,10 +5,6 @@ require('dotenv').config();
 const EventEmitter = require('events');
 const { spawn } = require('child_process');
 const simpleGit = require('simple-git');
-const git = simpleGit({
-  baseDir: __dirname,
-});
-
 const { asyncWrap } = require('./src/utils.js');
 
 async function awaitClose(child) {
@@ -20,6 +16,9 @@ async function awaitClose(child) {
 }
 
 async function doUpdate(child, message) {
+  const git = simpleGit({
+    baseDir: __dirname,
+  });
   const log = await git.log();
   const status = await git.status();
   if (!status.isClean()) {
@@ -36,7 +35,6 @@ async function doUpdate(child, message) {
   newChild.once('ready', function() {
     newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan, content: `Succesfully updated from \`${log.latest.hash}\` to \`${newLog.latest.hash}\``});
   });
-
 }
 
 function start() {
