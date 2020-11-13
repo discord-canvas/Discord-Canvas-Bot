@@ -31,10 +31,10 @@ async function loadCommand(file) {
   const command = require(`./commands/${file}`);
   if (Array.isArray(command.name)) {
     for (let name of command.name) {
-      client.commands.set(name.toLowerCase(), {call: command.call, check: command.check, help: command.help});
+      client.commands.set(name.toLowerCase(), {call: command.call, check: command.check, help: command.help, name: command.name[0].toLowerCase()});
     }
   } else {
-    client.commands.set(command.name.toLowerCase(), {call: command.call, check: command.check, help: command.help});
+    client.commands.set(command.name.toLowerCase(), {call: command.call, check: command.check, help: command.help, name: command.name});
   }
 }
 
