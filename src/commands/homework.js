@@ -8,7 +8,6 @@ const homework = JSON.parse(fs.readFileSync('homework.json'))
 
 const call = async function (msg, args) {
   try {
-    console.log(args);
     args = args.map((arg) => arg.toLowerCase())
     await travelTree(homework, args, 'questions/', msg.channel)
   } catch (err) {
