@@ -63,7 +63,7 @@ client.on('message', asyncWrap(async function(message) {
 
     const cmd = client.commands.get(command);
 
-    if (!(cmd.check instanceof Function) || unwrapSync(cmd.check(message))) {
+    if (!(cmd.check instanceof Function) || (await unwrapSync(cmd.check(message))) === true) {
       try {
         await cmd.call(message, parts);
       } catch(e) {
