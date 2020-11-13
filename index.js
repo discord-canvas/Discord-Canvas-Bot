@@ -15,6 +15,7 @@ async function awaitClose(child) {
   return new Promise((resolve) => {
     child.once('exit', resolve);
     child.send({t: 'close'});
+    child.disconnect();
   });
 }
 
@@ -27,13 +28,15 @@ async function doUpdate(child, message) {
   }
   console.log('Closing old client...');
   await awaitClose(child);
+  if (!child.killed) child.kill('SIGKILL');
   console.log('Starting update...');
   await git.pull();
   const newLog = await git.log();
   const newChild = start();
   newChild.once('ready', function() {
     newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan, content: `Succesfully updated from \`${log.latest.hash}\` to \`${newLog.latest.hash}\``});
-  })
+  });
+
 }
 
 function start() {
@@ -48,6 +51,9 @@ function start() {
   child.on('error', console.error);
   child.on('message', function(message) {
     events.emit(message.t, child, message);
+  });
+  events.on('ready', (child, message) => {
+    console.log(message);
   });
   events.on('update', asyncWrap(doUpdate) );
   events.on('send', function(message) {
