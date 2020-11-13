@@ -53,7 +53,7 @@ This corresponds to the question 1a of exercise 1 from module 111. To represent 
 data HomeworkNode = HomeworkNode {
   alt_desc :: String,
   image :: Bool,
-  children :: {HomeworkNode}
+  children :: {String: HomeworkNode}
 }
 ```
 If any field is empty, it will not be sent. For example, if we have the JSON: 
