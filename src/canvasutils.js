@@ -73,16 +73,19 @@ class CanvasUtils {
         inline: false
       }
     });
+    let extraFooter = '';
     if (filter !== undefined) {
+      const startSize = fields.length;
       let reFilter = new RegExp(filter, 'gi');
       fields = fields.filter(field => field.name.match(reFilter) !== null);
+      extraFooter = `${fields.length}/${startSize} | `;
     }
     return {
       title: 'Upcoming assignments',
       color: 0xff0000,
-      footer: { text: 'Week starting' },
+      footer: { text: `${extraFooter}Week starting` },
       timestamp: startDate.toISOString(),
-      fields
+      fields,
     };
   }
 }
