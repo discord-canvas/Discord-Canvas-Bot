@@ -19,14 +19,15 @@ async function awaitClose(child) {
 }
 
 async function doUpdate(child, message) {
-  console.log('Starting update');
   const log = await git.log();
   const status = await git.status();
   if (!status.isClean()) {
     child.send({ t: 'edit', msg: message.msg, chan: message.chan, content: `Unable to update from \`${log.latest.hash}\`: repo not clean`});
     return;
   }
+  console.log('Closing old client...');
   await awaitClose(child);
+  console.log('Starting update...');
   await git.pull();
   const newLog = await git.log();
   const newChild = start();

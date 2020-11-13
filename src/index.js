@@ -140,7 +140,6 @@ const startBot = module.exports = async function(botToken, canvasToken, config) 
 *******************************************************************************/
 
 process.on('message', asyncWrap(async function(message) {
-  console.log(message);
   switch(message.t) {
     case 'edit': {
       await client.channels.forge(message.chan).messages.forge(message.msg).edit(message.content);
