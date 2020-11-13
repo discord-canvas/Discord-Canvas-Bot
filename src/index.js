@@ -150,6 +150,10 @@ process.on('message', asyncWrap(async function(message) {
     }
     case 'close': {
       client.destroy();
+      client.db.close(function(err) {
+        if (err) console.error(err);
+        process.exit(0);
+      });
       break;
     }
   }
