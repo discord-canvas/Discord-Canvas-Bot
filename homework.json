@@ -330,6 +330,32 @@
             "6": {"image": true},
             "7": {"image": true}
           }
+        },
+        "6": {
+          "image": true,
+          "children": {
+            "1": {
+              "image": true,
+              "children": {
+                "a": {"image": true},
+                "b": {"image": true},
+                "c": {"image": true},
+                "d": {"image": true}
+              }
+            },
+            "2": {"image": true},
+            "3": {
+              "image": true,
+              "children": {
+                "a": {"image": true},
+                "b": {"image": true},
+                "c": {"image": true},
+                "d": {"image": true},
+                "e": {"image": true}
+              }
+            },
+            "4": {"image": true}
+          }
         }
       }
     }
