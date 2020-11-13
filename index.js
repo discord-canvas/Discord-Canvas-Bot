@@ -32,7 +32,7 @@ async function doUpdate(child, message) {
   const newLog = await git.log();
   const newChild = start();
   newChild.once('ready', function() {
-    newChild.send({ t: 'edit', msg: message.msg, chan: message.chan, content: `Succesfully updated from \`${log.latest.hash}\` to \`${newLog.latest.hash}\``});
+    newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan, content: `Succesfully updated from \`${log.latest.hash}\` to \`${newLog.latest.hash}\``});
   })
 }
 
@@ -50,6 +50,9 @@ function start() {
     events.emit(message.t, child, message);
   });
   events.on('update', asyncWrap(doUpdate) );
+  events.on('send', function(message) {
+    child.send(message);
+  })
   return events;
 }
 
