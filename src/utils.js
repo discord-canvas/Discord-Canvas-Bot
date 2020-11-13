@@ -39,3 +39,15 @@ exports.asyncWrap = function(asyncFunction, onError) {
     asyncFunction.apply(this, arguments).then(null, error);
   }
 }
+
+/**
+* Check if a value is a promise, if it is await it
+* @param {*} res - value to check
+* @retuns {*}
+*/
+exports.unwrapSync = async function(res) {
+  if (res instanceof Promise) {
+    res = await res;
+  }
+  return res;
+}

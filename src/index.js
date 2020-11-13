@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3');
 
 const Canvas = require('./canvas.js');
 const CanvasUtils = require('./canvasutils.js');
-const { asyncWrap } = require('./utils.js');
+const { asyncWrap, unwrapSync } = require('./utils.js');
 const { BOT_PERMISSIONS, BOT_PRESENCE, DB_NAME } = require('./constants.js');
 
 /*******************************************************************************
@@ -63,7 +63,7 @@ client.on('message', asyncWrap(async function(message) {
 
     const cmd = client.commands.get(command);
 
-    if (!(cmd.check instanceof Function) || cmd.check(message)) {
+    if (!(cmd.check instanceof Function) || unwrapSync(cmd.check(message))) {
       try {
         await cmd.call(message, parts);
       } catch(e) {
