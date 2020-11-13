@@ -1,6 +1,6 @@
 
 async function call(msg, args) {
-  await msg.channel.send({{
+  await msg.channel.send({embed: {
     title: 'Bot Repository',
     color: 0xff0000,
     fields: {value: "https://github.com/CammyFentreux/Discord-Canvas-Bot", name: "GitHub:"}
