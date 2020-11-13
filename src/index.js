@@ -28,7 +28,7 @@ const client = new Client({
 *******************************************************************************/
 
 async function loadCommand(file) {
-  const command = require(`./commands/${file}`);
+  const command = require(`./commands/${file.name}`);
   if (Array.isArray(command.name)) {
     for (let name of command.name) {
       client.commands.set(name.toLowerCase(), {call: command.call, check: command.check, help: command.help, name: command.name});
@@ -39,7 +39,7 @@ async function loadCommand(file) {
 }
 
 async function loadCommands() {
-  const files = await fs.readdir(`${__dirname}/commands`);
+  const files = (await fs.readdir(`${__dirname}/commands`, { withFileTypes: true })).filter(ent => ent.isFile() && ent.name.endsWith('.js'));
   await Promise.all(files.map(loadCommand));
 }
 
