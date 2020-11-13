@@ -51,3 +51,18 @@ exports.unwrapSync = async function(res) {
   }
   return res;
 }
+
+/**
+* Send a message via ipc
+* @async
+* @param {Object} message - Data to send
+*/
+exports.ipcSend = function(message) {
+  if (process.send === undefined) return Promise.resolve();
+  return new Promise((resolve,reject) => {
+    process.send(message, function(err) {
+      if (err !== null) return reject(err);
+      resolve();
+    });
+  })
+}

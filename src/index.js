@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3');
 
 const Canvas = require('./canvas.js');
 const CanvasUtils = require('./canvasutils.js');
-const { asyncWrap, unwrapSync } = require('./utils.js');
+const { asyncWrap, unwrapSync, ipcSend } = require('./utils.js');
 const { BOT_PERMISSIONS, BOT_PRESENCE, DB_NAME } = require('./constants.js');
 
 /*******************************************************************************
@@ -43,19 +43,12 @@ async function loadCommands() {
   await Promise.all(files.map(loadCommand));
 }
 
-function ipcSend(message) {
-  if (process.send === undefined) return Promise.resolve();
-  return new Promise((resolve) => {
-    process.send(message, resolve);
-  })
-}
-
 /*******************************************************************************
 *** Event handlers
 *******************************************************************************/
 
 client.on('ready', function() {
-  ipcSend({ t: 'ready', id: client.user.id });
+  ipcSend({ t: 'ready', id: client.user.id }).then(null,console.error);
   console.log(`Logged in as ${client.user.username}`);
   client.generateInvite({permissions:BOT_PERMISSIONS}).then(link => console.log(`Invite link ${link}`), console.error);
 });
@@ -141,6 +134,14 @@ const startBot = module.exports = async function(botToken, canvasToken, config) 
   await client.login(botToken);
   return client;
 }
+
+/*******************************************************************************
+*** IPC handlers
+*******************************************************************************/
+
+process.on('message', function(message, sendHandle) {
+  console.log(message);
+})
 
 /*******************************************************************************
 *** Startup
