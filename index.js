@@ -5,6 +5,7 @@ require('dotenv').config();
 const EventEmitter = require('events');
 const { spawn } = require('child_process');
 const simpleGit = require('simple-git');
+const path = require('path');
 const { asyncWrap } = require('./src/utils.js');
 
 async function awaitClose(child) {
@@ -31,10 +32,26 @@ async function doUpdate(child, message) {
   console.log('Starting update...');
   await git.pull();
   const newLog = await git.log();
+  await doNpmInstall();
   const newChild = start();
   newChild.once('ready', function() {
     newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan, content: `Succesfully updated from \`${log.latest.hash}\` to \`${newLog.latest.hash}\``});
   });
+}
+
+function doNpmInstall() {
+  return new Promise((resolve, reject) => {
+    const npm = spawn(path.join(path.dirname(process.argv0),'npm'), ['install'], {
+      cwd: __dirname,
+      env: {},
+      stdio: ['ignore', 'inherit', 'inherit'],
+      shell: false
+    });
+    npm.once('exit', function(exitCode, signal) {
+      if (exitCode === 0) return resolve(exitCode);
+      reject(exitCode, signal);
+    })
+  })
 }
 
 function start() {
