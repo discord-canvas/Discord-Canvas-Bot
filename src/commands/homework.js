@@ -51,7 +51,7 @@ async function travelTree(curr, args, path, destination) {
     return
   }
   console.log(args);
-  travelTree(curr.children[args[0]], args.slice(1),`${path}${args[0]}.`, destination)
+  await travelTree(curr.children[args[0]], args.slice(1),`${path}${args[0]}.`, destination)
 }
 
 exports.name = ['homework','hw']
