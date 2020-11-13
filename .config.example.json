@@ -4,10 +4,10 @@
   "prefix": "ca!",
   "overrides": [
     {
-      "offset": 399600000,
+      "offset": 406800000,
       "course": "COMP101",
       "name": "Weekly homework",
-      "points": 1
+      "points": 12
     },
     {
       "offset": 403200000,
