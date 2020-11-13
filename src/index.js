@@ -8,7 +8,6 @@ const Canvas = require('./canvas.js');
 const CanvasUtils = require('./canvasutils.js');
 const { asyncWrap } = require('./utils.js');
 const { BOT_PERMISSIONS, BOT_PRESENCE, DB_NAME } = require('./constants.js');
-const { setCanvasUtilsClient } = require('./canvasutils.js');
 
 /*******************************************************************************
 *** Create bot instance
