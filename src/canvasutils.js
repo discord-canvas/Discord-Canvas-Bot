@@ -69,7 +69,7 @@ class CanvasUtils {
     let fields = assignments.map(a => {
       return {
         name: courses[a.course],
-        value: `[${a.name}](${a.url})\nDue: ${a.dueDate.toUTCString()}\nPoints: ${a.points}`,
+        value: `${a.url ? `[${a.name}](${a.url})` : a.name}\nDue: ${a.dueDate.toUTCString()}\nPoints: ${a.points}`,
         inline: false
       }
     });
