@@ -41,7 +41,7 @@ async function travelTree(curr, args, path, destination) {
     if (curr.image) {
       await sendImage(destination, path.slice(0, path.length-1))
     }
-    for ([name, child] of Object.entries(curr.children).sort((a,b) =>  ''+a[0].localeCompare(b[0]))) {
+    for (let [name, child] of Object.entries(curr.children).sort((a,b) =>  ''+a[0].localeCompare(b[0]))) {
       if (child.image) {
         await sendImage(destination, `${path}${name}`)
       }

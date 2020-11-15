@@ -1,5 +1,5 @@
 
-async function call(msg, args) {
+async function call(msg) {
   await msg.channel.send({embed: {
     title: 'Bot Repository',
     color: 0xff0000,
