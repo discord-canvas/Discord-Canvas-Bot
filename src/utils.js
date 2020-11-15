@@ -105,15 +105,12 @@ const assignmentSame = exports.assignmentSame = function(a, b) {
 exports.assignmentsSame = function(a, b) {
   if (a.length !== b.length) return false;
   for (let assA of a) {
-    let found = false;
     // TODO: Maybe pop used assignments from b here
+    let notFound = true;
     for (let assB of b) {
-      if (assignmentSame(assA, assB)) {
-        found = true;
-        break;
-      }
+      if (assignmentSame(assA, assB)) notFound = false;
     }
-    if (!found) return false;
+    if (notFound) return false;
   }
   return true;
 }
