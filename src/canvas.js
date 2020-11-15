@@ -30,7 +30,8 @@ const req = Object.freeze({
     url.searchParams.set('page', '1');
     url.searchParams.set('per_page', PAGE_LENGTH);
     let responses = [];
-    while (true) {
+    let cond = true
+    while (cond) {
       const res = await req.get(url, auth, headers);
       if (!res.ok) throw new Error(`Fetch error ${res.status} ${res.statusText}`);
       responses.push(await res.json());
@@ -39,9 +40,9 @@ const req = Object.freeze({
       if ('next' in links) {
         url = links.next;
       } else {
-        break;
+        cond = false;
       }
-      if (links.current === links.last) break;
+      if (links.current === links.last) cond = false;
     }
     return responses.flat();
   }
