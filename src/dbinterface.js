@@ -153,3 +153,10 @@ exports.saveWeek = async function(db, week) {
     }
   });
 }
+
+exports.deleteAssignments = async function(db, assignments) {
+  // TODO: Change this to something better
+  let values = '?,'.repeat(assignments.length);
+  if (values.length > 0) values = values.substring(0, values.length-1);
+  await asyncRun(db, `DELETE FROM assignments WHERE id IN (${values})`, ...assignments);
+}

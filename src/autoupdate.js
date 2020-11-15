@@ -3,7 +3,7 @@
 const { performance } = require('perf_hooks');
 
 const { getWeekTimes, assignmentsSame } = require('./utils.js');
-const { getWeek, saveWeek } = require('./dbinterface.js');
+const { getWeek, saveWeek, deleteAssignments } = require('./dbinterface.js');
 
 exports.assignmentAutoUpdate = async function(client) {
   console.log('Starting auto updates...');
@@ -29,6 +29,26 @@ async function updateWeek(client, offset) {
   } else {
     const { assignments } = await client.canvasUtils.getWeeksAssignments(offset);
     if (!assignmentsSame(week.assignments, assignments)) {
+      let toRemove = [];
+      for (let assignmentOld of week.assignments) {
+        const id = assignmentOld.id;
+        let found = false;
+        for (let assignmentNew of assignments) {
+          if (assignmentNew.id === id) {
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          toRemove.push(id);
+        }
+      }
+
+      if (toRemove.length > 0) {
+        console.log('Assignments were deleted', toRemove);
+        await deleteAssignments(client.db, toRemove);
+      }
+
       week.assignments = assignments;
       save = true;
       update = true;
