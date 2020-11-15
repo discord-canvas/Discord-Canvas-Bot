@@ -128,7 +128,7 @@ exports.getWeek = async function(db, startTime) {
   if (row === undefined) return null;
   const week = { start: row.time_start, end: row.time_end, assignments: [], messages: [] };
 
-  const assignmentRows = await asyncAll(db, 'SELECT id, time_due, course_id, name, points FROM assignments WHERE week_id=?', startTime);
+  const assignmentRows = await asyncAll(db, 'SELECT id, time_due, course_id, name, url, points FROM assignments WHERE week_id=?', startTime);
   for (let assignment of assignmentRows) {
     const courseRow = await asyncGet(db, 'SELECT name FROM courses WHERE id=?', assignment.course_id);
     if (courseRow === undefined) continue;
@@ -141,6 +141,7 @@ exports.getWeek = async function(db, startTime) {
         name: courseRow.name
       },
       name: assignment.name,
+      url: assignment.url,
       points: assignment.points
     });
   }
@@ -166,9 +167,9 @@ exports.saveWeek = async function(db, week) {
 
     let courses = {};
     for (let assignment of week.assignments) {
-      await asyncRun(db, 'INSERT INTO assignments (id, week_id, time_due, course_id, name, points) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE set week_id=?, time_due=?, course_id=?, name=?, points=?',
-        assignment.id, assignment.week.start, assignment.due, assignment.course.id, assignment.name, assignment.points,
-        assignment.week.start, assignment.due, assignment.course.id, assignment.name, assignment.points
+      await asyncRun(db, 'INSERT INTO assignments (id, week_id, time_due, course_id, name, url, points) VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE set week_id=?, time_due=?, course_id=?, name=?, url=?, points=?',
+        assignment.id, assignment.week.start, assignment.due, assignment.course.id, assignment.name, assignment.url, assignment.points,
+        assignment.week.start, assignment.due, assignment.course.id, assignment.name, assignment.url, assignment.points
       );
       courses[assignment.course.id] = assignment.course;
     }
