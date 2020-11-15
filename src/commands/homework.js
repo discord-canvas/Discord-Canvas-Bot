@@ -29,10 +29,10 @@ const call = async function (msg, args) {
 async function travelTree(curr, args, path, destination) {
   // check for and handle branching arg
   if (args[0].includes(',')) {
-    branches = args.shift().split(',')
+    const branches = args.shift().split(',')
     args.unshift(branches.shift())
 
-    for (branch of branches) {
+    for (let branch of branches) {
       await sendNode(destination, curr.children[branch], `${path}${branch}`)
     }
 
@@ -54,7 +54,6 @@ async function travelTree(curr, args, path, destination) {
     await sendNode(destination, curr.children[args[0]], `${path}${args[0]}`)
     return
   }
-  console.log(args);
   await travelTree(curr.children[args[0]], args.slice(1),`${path}${args[0]}.`, destination)
 }
 

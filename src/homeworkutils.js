@@ -3,7 +3,7 @@
 const fs = require('fs').promises;
 
 exports.sendImage = async (destination, path) => {
-  image = await fs.readFile(path + '.png')
+  const image = await fs.readFile(path + '.png')
   destination.send('', {files:[image]})
 }
 
@@ -13,7 +13,7 @@ exports.sendNode = async (destination, node, path) => {
     exports.sendImage(destination, path)
   }
 
-  message = ''  // collates messages into one rather than sending many
+  let message = ''  // collates messages into one rather than sending many
   if (node.alt_desc) {
     message += `\n${node.alt_desc}\n`
   }
