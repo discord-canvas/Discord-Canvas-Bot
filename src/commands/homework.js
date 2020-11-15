@@ -12,7 +12,7 @@ const call = async function (msg, args) {
       await sendNode(msg.channel, homework)
     } else {
       args = args.map((arg) => arg.toLowerCase())
-      await travelTree(homework, args, 'questions/', msg.channel)
+      await travelTree(homework, args, msg.client.config["question_directory"], msg.channel)
     }
   } catch (err) {
     switch (err.name) {
