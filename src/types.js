@@ -9,10 +9,10 @@ function TypeOrUndefined(type) {
   }
 }
 
-function TypeOrDefault(type, default) {
+function TypeOrDefault(type, defaultValue) {
   return function(value) {
     if (isOfBaseType(value, type)) return value;
-    return default;
+    return defaultValue;
   }
 }
 
