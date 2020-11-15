@@ -1,17 +1,22 @@
 'use strict';
 
+const { performance } = require('perf_hooks');
+
 const { getWeekTimes, assignmentsSame } = require('./utils.js');
 const { getWeek, saveWeek } = require('./dbinterface.js');
 
 exports.assignmentAutoUpdate = async function(client) {
-  await updateWeek(client);
-  await updateWeek(client, 1);
+  console.log('Starting auto updates...');
+  const start = performance.now();
+  await updateWeekSafe(client);
+  await updateWeekSafe(client, 1);
+  const end = performance.now();
+  console.log(`Finished auto updates in ${end-start}ms`);
 }
 
 let updateActive = false;
 
 async function updateWeek(client, offset) {
-  console.log('Starting auto update...');
   const weekTimes = getWeekTimes(offset);
 
   let week = await getWeek(client.db, weekTimes.start);
@@ -34,7 +39,6 @@ async function updateWeek(client, offset) {
   for (let message of week.messages) {
     sentChannels[message.channelID] = message;
   }
-  console.log(sentChannels);
 
   const now = Date.now();
 
@@ -50,7 +54,6 @@ async function updateWeek(client, offset) {
   if (save) {
     await saveWeek(client.db, week);
   }
-  console.log('Finished auto update');
 }
 
 async function sendWeekUpdate(client, update, weekTimes, autoConf, embed, sentChannels, week, now) {
