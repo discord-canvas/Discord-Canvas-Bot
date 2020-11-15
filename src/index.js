@@ -56,7 +56,7 @@ client.on('ready', function() {
 client.on('message', asyncWrap(async function(message) {
   if (message.author.bot) return;
   if (!message.content.startsWith(client.config.prefix)) return;
-  const parts = message.content.substring(client.config.prefix.length).trim().split(' ');
+  const parts = message.content.substring(client.config.prefix.length).trim().split(/  */);
   const command = parts.splice(0, 1)[0].trim().toLowerCase();
 
   if (client.commands.has(command)) {
