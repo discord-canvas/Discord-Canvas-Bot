@@ -19,7 +19,7 @@ exports.sendNode = async (destination, node, path) => {
   }
   if (node.children) {
     message += '\nSubs:\n'
-    for (let [key, value] of Object.entries(node.children)) {
+    for (let key of Object.keys(node.children)) {
       message += `\t${key}\n`
     }
   }
