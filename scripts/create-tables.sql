@@ -8,7 +8,7 @@ CREATE TABLE assignments (
   id INT NOT NULL,
   week_id INT NOT NULL,
   time_due BIGINT NOT NULL,
-  course_id INT NOT NULL,
+  course_id TEXT NOT NULL,
   name TEXT,
   url TEXT,
   points INT NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE assignments (
 );
 
 CREATE TABLE courses (
-  id INT NOT NULL,
+  id TEXT NOT NULL,
   name TEXT NOT NULL,
   PRIMARY KEY(id)
 );
