@@ -1,40 +1,6 @@
 'use strict';
 
-/**
-* Week object
-* @typedef {Object} Week
-* @param {Number} start
-* @param {Number} end
-* @param {Array.<Assignment>} assignments
-* @param {Array.<Message>} messages
-*/
-
-/**
-* Assignment object
-* @typedef {Object} Assignment
-* @param {Number} id
-* @param {Week} week
-* @param {Number} due
-* @param {Course} course
-* @param {String} name
-* @param {String} url
-* @param {Number} points
-*/
-
-/**
-* Course object
-* @typedef {Object} Course
-* @param {Number} id
-* @param {String} name
-*/
-
-/**
-* Message object
-* @typedef {Object} Message
-* @param {String} messageID
-* @param {String} channelID
-* @param {Week} week
-*/
+const { Week, enforceType } = require('./types.js');
 
 /**
 * get from database
@@ -151,7 +117,7 @@ exports.getWeek = async function(db, startTime) {
     week.messages.push({ messageID: message.message_id, channelID: message.channel_id, week });
   }
 
-  return week;
+  return enforceType(Week, week);
 }
 
 /**

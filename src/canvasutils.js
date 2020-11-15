@@ -2,6 +2,7 @@
 
 const { performance } = require('perf_hooks');
 
+const { Week, enforceType } = require('./types.js');
 const { getWeekTimes } = require('./utils.js');
 
 const UPDATE_TIME = 15 * 60 * 1000;
@@ -58,7 +59,7 @@ class CanvasUtils {
       assignments.concat(this.parseAssignmentOverrides(weekTimes.start, courses)).filter(a => a.due >= weekTimes.start && a.due <= weekTimes.end ).sort((a,b) => a.due - b.due),
       courses
     );
-    return week;
+    return enforceType(Week, week);
   }
 
   parseAssignmentOverrides(startTime, courses) {
