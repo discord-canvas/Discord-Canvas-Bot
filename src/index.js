@@ -6,6 +6,7 @@ const sqlite3 = require('sqlite3');
 
 const Canvas = require('./canvas.js');
 const CanvasUtils = require('./canvasutils.js');
+const { assignmentAutoUpdate } = require('./autoupdate.js');
 const { asyncWrap, unwrapSync, ipcSend } = require('./utils.js');
 const { BOT_PERMISSIONS, BOT_PRESENCE, DB_NAME } = require('./constants.js');
 
@@ -82,7 +83,8 @@ client.once('close', function() {
     if (err) console.error(err);
     process.exit(0);
   });
-})
+});
+
 
 /*******************************************************************************
 *** Startup the bot
@@ -135,6 +137,7 @@ const startBot = module.exports = async function(botToken, canvasToken, config) 
   });
   await loadCommands();
   await client.login(botToken);
+  client.setInterval(asyncWrap(assignmentAutoUpdate), 1000 * 60 * 15, client);
   return client;
 }
 

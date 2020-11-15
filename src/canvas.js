@@ -103,7 +103,7 @@ class Canvas {
       let due = Date.parse(a.due_at);
       let dueDate = new Date();
       dueDate.setTime(due);
-      return {id: a.id, name: a.name, course: a.course_id, desc: a.description, due, dueDate, points: a.points_possible, url: a.html_url };
+      return {id: a.id, name: a.name, course: a.course_id, due, dueDate, points: a.points_possible, url: a.html_url };
     });
   }
 
