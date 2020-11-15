@@ -71,6 +71,7 @@ const ASSIGNMENT_KEYS = Object.freeze([
   ['id'],
   ['due'],
   ['course','id'],
+  ['course','name'],
   ['name'],
   ['url'],
   ['points'],
