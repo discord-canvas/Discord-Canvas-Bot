@@ -137,7 +137,8 @@ const startBot = module.exports = async function(botToken, canvasToken, config) 
   });
   await loadCommands();
   await client.login(botToken);
-  client.setInterval(asyncWrap(assignmentAutoUpdate), 1000 * 60 * 15, client);
+  await assignmentAutoUpdate(client);
+  client.setInterval(asyncWrap(assignmentAutoUpdate), 1000 * 60 * 30, client);
   return client;
 }
 

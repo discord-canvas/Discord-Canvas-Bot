@@ -10,10 +10,11 @@ function parseAssignments(week, assignments, courses) {
   return assignments.map((a) => {
     const newA = { id: undefined, due: undefined, name: undefined, url: undefined, points: undefined };
     for (let key in newA) {
-      newA[key] = a.key;
+      newA[key] = a[key];
     }
     newA.week = week;
-    newA.course = { id: a.course_id, name: courses[a.course_id] };
+    newA.course = { id: a.course, name: courses[a.course] };
+    return newA;
   });
 }
 
@@ -48,7 +49,7 @@ class CanvasUtils {
   async getWeeksAssignments(offset) {
     const weekTimes = getWeekTimes(offset);
     let { courses, assignments } = await this.getCoursesAndAssignmentsCached();
-    const week = week = {
+    const week = {
       start: weekTimes.start,
       end: weekTimes.end,
     };
@@ -67,7 +68,7 @@ class CanvasUtils {
       let dueDate = new Date();
       dueDate.setTime(due);
       return {
-        id: `override-${o.name}-${due}`,
+        id: `override-${o.course}-${o.name}-${due}`,
         name: o.name,
         course: o.course,
         due, dueDate,
@@ -82,9 +83,10 @@ class CanvasUtils {
     startDate.setTime(week.start);
 
     let fields = week.assignments.map(a => {
+      let dueDate = new Date(a.due);
       return {
         name: a.course.name,
-        value: `${a.url ? `[${a.name}](${a.url})` : a.name}\nDue: ${a.dueDate.toUTCString()}\nPoints: ${a.points}`,
+        value: `${a.url ? `[${a.name}](${a.url})` : a.name}\nDue: ${dueDate.toUTCString()}\nPoints: ${a.points}`,
         inline: false
       }
     });
