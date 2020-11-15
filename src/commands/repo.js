@@ -1,3 +1,4 @@
+'use strict';
 
 async function call(msg) {
   await msg.channel.send({embed: {
