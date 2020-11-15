@@ -13,3 +13,8 @@ CREATE TABLE assignments (
   name STRING,
   points INT
 );
+
+CREATE TABLE courses {
+  id INT PRIMARY KEY,
+  name STRING
+};
