@@ -9,6 +9,14 @@ function TypeOrUndefined(type) {
   }
 }
 
+function TypeOrDefault(type, default) {
+  return function(value) {
+    if (isOfBaseType(value, type)) return value;
+    return default;
+  }
+}
+
+// Type script? Never heard of it mate
 function enforceType(type, value) {
   if (isOfBaseType(type, Object)) {
     if (value === undefined) {
@@ -35,8 +43,8 @@ function enforceType(type, value) {
 /**
 * Course object
 * @typedef {Object} Course
-* @param {String} id
-* @param {String} name
+* @param {String} id - Canvas ID of course
+* @param {String} name - Name of course
 */
 const Course = Object.freeze({
   id: String,
@@ -46,13 +54,13 @@ const Course = Object.freeze({
 /**
 * Assignment object
 * @typedef {Object} Assignment
-* @param {String} id
-* @param {Week} week
-* @param {Number} due
-* @param {Course} course
-* @param {String} name
-* @param {String} url
-* @param {Number} points
+* @param {String} id - Canvas ID of assignment
+* @param {Week} week - Reference to week this assignment is part of
+* @param {Number} due - Unix time for when assignment is due
+* @param {Course} course - Reference to this assignment's course
+* @param {String} name - Name of this assignment
+* @param {String} url - Link to canvas page for this assignment
+* @param {Number} points - Points assignment is worth
 */
 const Assignment = Object.freeze({
   id: String,
@@ -67,9 +75,9 @@ const Assignment = Object.freeze({
 /**
 * Message object
 * @typedef {Object} Message
-* @param {String} messageID
-* @param {String} channelID
-* @param {Week} week
+* @param {String} messageID - Snowflake ID of message
+* @param {String} channelID - Snowflake ID of channel
+* @param {Week} week - Reference to week object
 */
 const Message = Object.freeze({
   messageID: String,
@@ -80,10 +88,10 @@ const Message = Object.freeze({
 /**
 * Week object
 * @typedef {Object} Week
-* @param {Number} start
-* @param {Number} end
-* @param {Array.<Assignment>} assignments
-* @param {Array.<Message>} messages
+* @param {Number} start - Unix time for start of week (also used as ID)
+* @param {Number} end - Unix time for end of week
+* @param {Array.<Assignment>} assignments - List of week's assignments
+* @param {Array.<Message>} messages - List of week's auto-update messages
 */
 const Week = Object.freeze({
   start: Number,
@@ -92,4 +100,52 @@ const Week = Object.freeze({
   messages: [Message],
 });
 
-module.exports = {Week, Assignment, Course, Message, enforceType};
+/**
+* Config override
+* Adds additional assignments to week-by-week
+* @typedef {Object} ConfigOverride
+* @param {Number} offset
+* @param {String} course
+* @param {String} name
+* @param {Number} points
+*/
+const ConfigOverride = Object.freeze({
+  offset: Number,
+  course: String,
+  name: String,
+  points: Number,
+});
+
+/**
+* Automated assignments update
+* @typedef {Object} ConfigAutomatedAssignment
+* @param {Number} offset
+* @param {String} channel
+*/
+const ConfigAutomatedAssignment = Object.freeze({
+  offset: Number,
+  channel: String,
+})
+
+/**
+* Config
+* @typedef {Object} Config
+* @param {String} api
+* @param {String} course_filter
+* @param {String} prefix
+* @param {Array.<ConfigOverride>} overrides
+* @param {Array.<ConfigAutomatedAssignment>} automated_assignments
+*/
+const Config = Object.freeze({
+  api: TypeOrDefault(String, 'https://instructure.com/api/v1'),
+  course_filter: TypeOrDefault(String, '(.*)'),
+  prefix: TypeOrDefault(String, 'ca!'),
+  overrides: [ConfigOverride],
+  automated_assignments: [ConfigAutomatedAssignment],
+});
+
+module.exports = {
+  Week, Assignment, Course, Message,
+  Config, ConfigOverride, ConfigAutomatedAssignment,
+  enforceType,
+};
