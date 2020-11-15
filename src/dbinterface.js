@@ -163,7 +163,6 @@ exports.saveWeek = async function(db, week) {
     await asyncRun(db, 'INSERT INTO weeks (time_start, time_end) VALUES (?, ?) ON CONFLICT(time_start) DO UPDATE set time_end=?',
       week.start, week.end, week.end
     );
-    console.log('Saved week');
 
     let courses = {};
     for (let assignment of week.assignments) {
@@ -173,13 +172,11 @@ exports.saveWeek = async function(db, week) {
       );
       courses[assignment.course.id] = assignment.course;
     }
-    console.log('Saved assignments');
     for (let course of Object.values(courses)) {
       await asyncRun(db, 'INSERT INTO courses (id, name) VALUES (?, ?) ON CONFLICT(id) DO UPDATE set name=?',
         course.id, course.name, course.name
       );
     }
-    console.log('Saved courses');
 
     for (let message of week.messages) {
       await asyncRun(db, 'INSERT INTO messages (message_id, channel_id, week_id) VALUES (?, ?, ?) ON CONFLICT(message_id) DO UPDATE SET channel_id=?, week_id=?',
@@ -187,6 +184,5 @@ exports.saveWeek = async function(db, week) {
         message.channelID, message.week.start
       );
     }
-    console.log('Saved messages');
   });
 }
