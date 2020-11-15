@@ -2,9 +2,22 @@
 
 const { performance } = require('perf_hooks');
 
+const { Week, enforceType } = require('./types.js');
 const { getWeekTimes } = require('./utils.js');
 
 const UPDATE_TIME = 15 * 60 * 1000;
+
+function parseAssignments(week, assignments, courses) {
+  return assignments.map((a) => {
+    const newA = { id: undefined, due: undefined, name: undefined, url: undefined, points: undefined };
+    for (let key in newA) {
+      newA[key] = a[key];
+    }
+    newA.week = week;
+    newA.course = { id: a.course, name: courses[a.course] };
+    return newA;
+  });
+}
 
 class CanvasUtils {
   constructor(canvas, overrides) {
@@ -37,11 +50,16 @@ class CanvasUtils {
   async getWeeksAssignments(offset) {
     const weekTimes = getWeekTimes(offset);
     let { courses, assignments } = await this.getCoursesAndAssignmentsCached();
-    return {
-      courses,
-      assignments: assignments.concat(this.parseAssignmentOverrides(weekTimes.start, courses)).filter(a => a.due >= weekTimes.start && a.due <= weekTimes.end ).sort((a,b) => a.due - b.due),
-      weekTimes
+    const week = {
+      start: weekTimes.start,
+      end: weekTimes.end,
     };
+    week.assignments = parseAssignments(
+      week,
+      assignments.concat(this.parseAssignmentOverrides(weekTimes.start, courses)).filter(a => a.due >= weekTimes.start && a.due <= weekTimes.end ).sort((a,b) => a.due - b.due),
+      courses
+    );
+    return enforceType(Week, week);
   }
 
   parseAssignmentOverrides(startTime, courses) {
@@ -51,10 +69,9 @@ class CanvasUtils {
       let dueDate = new Date();
       dueDate.setTime(due);
       return {
-        id: `override-${o.name}-${due}`,
+        id: `override-${o.course}-${o.name}-${due}`,
         name: o.name,
         course: o.course,
-        desc: '',
         due, dueDate,
         points: o.points,
         url: ''
@@ -62,14 +79,15 @@ class CanvasUtils {
     });
   }
 
-  async generateAssignmentsEmbed(offset, filter) {
-    const { courses, assignments, weekTimes } = await this.getWeeksAssignments(offset);
+  async generateAssignmentsEmbed(week, filter) {
     const startDate = new Date();
-    startDate.setTime(weekTimes.start);
-    let fields = assignments.map(a => {
+    startDate.setTime(week.start);
+
+    let fields = week.assignments.map(a => {
+      let dueDate = new Date(a.due);
       return {
-        name: courses[a.course],
-        value: `${a.url ? `[${a.name}](${a.url})` : a.name}\nDue: ${a.dueDate.toUTCString()}\nPoints: ${a.points}`,
+        name: a.course.name,
+        value: `${a.url ? `[${a.name}](${a.url})` : a.name}\nDue: ${dueDate.toUTCString()}\nPoints: ${a.points}`,
         inline: false
       }
     });

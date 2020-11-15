@@ -16,5 +16,11 @@
       "name": "Weekly homework",
       "points": 1
     }
+  ],
+  "automated_assignments": [
+    {
+      "offset": -172800000,
+      "channel": "777341385627926589"
+    }
   ]
 }

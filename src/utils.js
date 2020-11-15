@@ -66,3 +66,51 @@ exports.ipcSend = function(message) {
     });
   })
 }
+
+const ASSIGNMENT_KEYS = Object.freeze([
+  ['id'],
+  ['due'],
+  ['course','id'],
+  ['course','name'],
+  ['name'],
+  ['url'],
+  ['points'],
+]);
+
+/**
+* Check if two assignments are the same
+* @param {Assignment} a
+* @param {Assignment} b
+* @returns {Boolean}
+*/
+const assignmentSame = exports.assignmentSame = function(a, b) {
+  for (let keys of ASSIGNMENT_KEYS) {
+    let valueA, valueB;
+    for (let key of keys) {
+      valueA = valueA === undefined ? a[key] : valueA[key];
+      valueB = valueB === undefined ? b[key] : valueB[key];
+    }
+    if (valueA !== valueB) return false;
+  }
+  return true;
+}
+
+/**
+* Check if two lists of assignments are the same
+* VERY SLOW
+* @param {Array.<Assignment>} a
+* @param {Array.<Assignment>} b
+* @return {Boolean}
+*/
+exports.assignmentsSame = function(a, b) {
+  if (a.length !== b.length) return false;
+  for (let assA of a) {
+    // TODO: Maybe pop used assignments from b here
+    let notFound = true;
+    for (let assB of b) {
+      if (assignmentSame(assA, assB)) notFound = false;
+    }
+    if (notFound) return false;
+  }
+  return true;
+}

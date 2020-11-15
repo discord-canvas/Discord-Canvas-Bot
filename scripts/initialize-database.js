@@ -14,7 +14,8 @@ db.on('error', function() {
 
 db.once('open', async function() {
   const sql = await fs.readFile(`${__dirname}/create-tables.sql`, {encoding: 'utf-8'});
-  console.log('Writing to database...', sql);
+  console.log('Writing to database...');
+  console.log(sql);
   db.exec(sql, function(err) {
     if (err !== null) return console.error(err);
     console.log('Success');

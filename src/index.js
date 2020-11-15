@@ -6,8 +6,10 @@ const sqlite3 = require('sqlite3');
 
 const Canvas = require('./canvas.js');
 const CanvasUtils = require('./canvasutils.js');
+const { assignmentAutoUpdate } = require('./autoupdate.js');
 const { asyncWrap, unwrapSync, ipcSend } = require('./utils.js');
 const { BOT_PERMISSIONS, BOT_PRESENCE, DB_NAME } = require('./constants.js');
+const { Config, enforceType } = require('./types.js');
 
 /*******************************************************************************
 *** Create bot instance
@@ -82,7 +84,8 @@ client.once('close', function() {
     if (err) console.error(err);
     process.exit(0);
   });
-})
+});
+
 
 /*******************************************************************************
 *** Startup the bot
@@ -99,6 +102,7 @@ const startBot = module.exports = async function(botToken, canvasToken, config) 
   const db = new sqlite3.Database(DB_NAME, sqlite3.OPEN_READWRITE);
   await awaitOpen(db);
   db.on('error', console.error);
+  config = enforceType(Config, config);
   const canvas = new Canvas(canvasToken, config);
   const canvasUtils = new CanvasUtils(canvas, config.overrides);
   Object.defineProperties(client, {
@@ -135,6 +139,10 @@ const startBot = module.exports = async function(botToken, canvasToken, config) 
   });
   await loadCommands();
   await client.login(botToken);
+  if (config.automated_assignments.length > 0) {
+    await assignmentAutoUpdate(client);
+    client.setInterval(asyncWrap(assignmentAutoUpdate), 1000 * 60 * 30, client);
+  }
   return client;
 }
 
