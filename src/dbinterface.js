@@ -37,23 +37,6 @@ function asyncAll(database, sql, ...params) {
 }
 
 /**
-* prepare a statement
-* @async
-* @param {Database} database
-* @param {String} sql
-* @param {Array} params
-* @returns {Statement}
-*/
-function asyncPrepare(database, sql, ...params) {
-  return new Promise((resolve, reject) => {
-    const statement = database.prepare(sql, ...params, function(err) {
-      if (err !== null) return reject(err);
-      resolve(statement);
-    });
-  });
-}
-
-/**
 * run a statement
 * @async
 * @param {Database} database
