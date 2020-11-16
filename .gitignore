@@ -2,3 +2,4 @@
 node_modules/
 .store.db
 .config.json
+start.sh
