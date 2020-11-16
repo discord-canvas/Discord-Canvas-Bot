@@ -23,8 +23,10 @@ Configuration of the bot is done in the `.config.json` file, there is an example
 {
   "api": String, // The base URL of the canvas API
   "course_filter": String, // A regex filter for course names retrieved from /courses
-  "prefix": String, // The bot command prefix (default "ca!"), its what is put before commands e.g. "ca!help"
-  "overrides": [AssignmentOverride] // A list of assignment overrides
+  "question_directory": String?, // Relative path to directory containing questions
+  "prefix": String?, // The bot command prefix (default "ca!"), its what is put before commands e.g. "ca!help"
+  "overrides": [AssignmentOverride]?, // A list of assignment overrides
+  "automated_assignments": [AutomatedAssignment]?, // List of automated assignment channels
 }
 ```
 ```javascript
@@ -32,10 +34,19 @@ Configuration of the bot is done in the `.config.json` file, there is an example
 * Defines extra assignments that will be shown in output
 */
 {
-  "offset": Number, // Offset in ms from start of week (monday 00:00) for when assignment is due
+  "offset": Number, // Offset in ms from start of week (monday 00:00) for when assignment is due (ms)
   "course": String, // Name of course assignment is for
   "name": String, // Name of assignment
-  "points": Number // Number of points assignment is worth
+  "points": Number, // Number of points assignment is worth
+}
+```
+```javascript
+/** AutomatedAssignment
+* Defines channel that will automatically be send upcoming assignments
+*/
+{
+  "offset": Number, // Offset from start of week of when to send message (ms)
+  "channel": String, // Snowflake ID of channel to send to
 }
 ```
 
