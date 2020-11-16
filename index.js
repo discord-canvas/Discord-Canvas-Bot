@@ -43,7 +43,7 @@ function doNpmInstall() {
   return new Promise((resolve, reject) => {
     const npm = spawn(path.join(path.dirname(process.argv0),'npm'), ['install'], {
       cwd: __dirname,
-      env: {},
+      env: { PATH: process.env.PATH },
       stdio: ['ignore', 'inherit', 'inherit'],
       shell: false
     });
