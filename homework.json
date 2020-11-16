@@ -124,7 +124,7 @@
         },
         "week-4": {"alt_desc": "There was no homework sheet in week 4, we started Assignment 1"},
         "week-5": {
-          "alt_desc": "Week 5 Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17018/files/1369140/download?wrap=1",
+          "alt_desc": "Week 5 Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17018/files/1369140/download?wrap=1\nSolution\n\thttps://liverpool.instructure.com/courses/17018/files/1383936/download?wrap=1",
           "children": {
             "partial-application": {
               "image": true,
@@ -177,6 +177,35 @@
                 "2": {"image": true},
                 "3": {"image": true},
                 "4": {"image": true}
+              }
+            }
+          }
+        },
+        "week-6": {
+          "alt_desc": "Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17018/files/1387411/download?wrap=1",
+          "children": {
+            "fold": {
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true},
+                "4": {"image": true}
+              }
+            },
+            "scan": {"image": true},
+            "takewhile-and-dropwhile": {
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true}
+
+              }
+            },
+            "zipwith": {
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true}
               }
             }
           }
@@ -357,7 +386,7 @@
         },
         "6": {
           "image": true,
-          "alt_desc": "Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17569/files/1367435/download?wrap=1"
+          "alt_desc": "Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17569/files/1367435/download?wrap=1",
           "children": {
             "1": {
               "image": true,
