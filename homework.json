@@ -49,48 +49,48 @@
           "alt_desc": "Week 2 Homework Sheet: \n\thttps://liverpool.instructure.com/courses/17018/files/1289791/download?wrap=1\nSolutions\n\thttps://liverpool.instructure.com/courses/17018/files/1280750/download?wrap=1",
           "children": {
             "ifs": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true}
+              "1": {"image": true, "solution": true},
+              "2": {"image": true, "solution": true},
+              "3": {"image": true, "solution": true}
             },
             "let-expressions": {
               "image": true,
               "children": {
-                "1": {"image": true},
-                "2": {"image": true},
-                "3": {"image": true}
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true}
               }
             },
             "tuples": {
               "children": {
-                "1": {"image": true},
-                "2": {"image": true},
-                "3": {"image": true}
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true}
               }
             },
             "lists": {
               "children": {
-                "1": {"image": true},
-                "2": {"image": true},
-                "3": {"image": true},
-                "4": {"image": true}
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true},
+                "4": {"image": true, "solution": true}
               }
             },
             "list-ranges": {
               "image": true,
               "children": {
-                "1": {"image": true},
-                "2": {"image": true},
-                "3": {"image": true},
-                "4": {"image": true}
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true},
+                "4": {"image": true, "solution": true}
               }
             },
             "list-comprehensions": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true},
-              "4": {"image": true},
-              "5": {"image": true}
+              "1": {"image": true, "solution": true},
+              "2": {"image": true, "solution": true},
+              "3": {"image": true, "solution": true},
+              "4": {"image": true, "solution": true},
+              "5": {"image": true, "solution": true}
             }
           }
         },
@@ -100,24 +100,24 @@
           "children": {
             "recursion": {
               "children": {
-                "1": {"image": true},
-                "2": {"image": true},
-                "3": {"image": true},
-                "4": {"image": true}
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true},
+                "4": {"image": true, "solution": true}
               }
             },
             "list-recursion": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true},
-              "4": {"image": true},
-              "5": {"image": true},
-              "6": {"image": true}
+              "1": {"image": true, "solution": true},
+              "2": {"image": true, "solution": true},
+              "3": {"image": true, "solution": true},
+              "4": {"image": true, "solution": true},
+              "5": {"image": true, "solution": true},
+              "6": {"image": true, "solution": true}
             },
             "more-complex-recursion-on-lists": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true}
+              "1": {"image": true, "solution": true},
+              "2": {"image": true, "solution": true},
+              "3": {"image": true, "solution": true}
             },
             "the-collatz-problem": {"image": true}
           }
@@ -129,54 +129,54 @@
             "partial-application": {
               "image": true,
               "children": {
-                "1": {"image": true},
-                "2": {"image": true},
-                "3": {"image": true},
-                "4": {"image": true},
-                "5": {"image": true}
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true},
+                "4": {"image": true, "solution": true},
+                "5": {"image": true, "solution": true}
               }
             },
             "polymorphic-types": {
               "image": true,
               "children": {
-                "1": {"image": true},
-                "2": {"image": true},
-                "3": {"image": true},
-                "4": {"image": true}
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true},
+                "4": {"image": true, "solution": true}
               }
             },
             "anonymous-functions": {
               "image": true,
               "children": {
-                "1": {"image": true},
-                "2": {"image": true},
-                "3": {"image": true},
-                "4": {"image": true}
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true},
+                "4": {"image": true, "solution": true}
               }
             },
             "function-composition": {
               "image": true,
               "children": {
-                "1": {"image": true},
-                "2": {"image": true},
-                "3": {"image": true},
-                "4": {"image": true}
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true},
+                "4": {"image": true, "solution": true}
               }
             },
             "map": {
               "children": {
-                "1": {"image": true},
-                "2": {"image": true},
-                "3": {"image": true},
-                "4": {"image": true}
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true},
+                "4": {"image": true, "solution": true}
               }
             },
             "filter": {
               "children": {
-                "1": {"image": true},
-                "2": {"image": true},
-                "3": {"image": true},
-                "4": {"image": true}
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true},
+                "4": {"image": true, "solution": true}
               }
             }
           }
@@ -219,39 +219,41 @@
           "image": true,
           "alt_desc": "The pdf had a typo in it, 1.7 should be submitted.\nSolutions: https://liverpool.instructure.com/courses/27539/modules/items/289855",
           "children": {
-            "1": {"image": true},
-            "2": {"image": true},
-            "3": {"image": true},
-            "4": {"image": true},
-            "5": {"image": true},
-            "6": {"image": true},
-            "7": {"image": true}
+            "1": {"image": true, "solution": true},
+            "2": {"image": true, "solution": true},
+            "3": {"image": true, "solution": true},
+            "4": {"image": true, "solution": true},
+            "5": {"image": true, "solution": true},
+            "6": {"image": true, "solution": true},
+            "7": {"image": true, "solution": true}
           }
         },
         "2": {
           "image": true,
           "alt_desc": "Solutions: https://liverpool.instructure.com/courses/27539/modules/items/291523",
           "children": {
-            "1": {"image": true},
-            "2": {"image": true},
-            "3": {"image": true},
-            "4": {"image": true},
-            "5": {"image": true}
+            "1": {"image": true, "solution": true},
+            "2": {"image": true, "solution": true},
+            "3": {"image": true, "solution": true},
+            "4": {"image": true, "solution": true},
+            "5": {"image": true, "solution": true}
           }
         },
         "3": {
           "image": true,
           "alt_desc": "Solutions: https://liverpool.instructure.com/courses/27539/modules/items/296730",
           "children": {
-            "1": {"image": true},
+            "1": {"image": true, "solution": true},
             "2": {
               "image": true,
+              "solution": true,
               "alt_desc": "Typo: This should be `for any *irrational* numbers r and s`"
             },
-            "3": {"image": true},
-            "4": {"image": true},
+            "3": {"image": true, "solution": true},
+            "4": {"image": true, "solution": true},
             "5": {
               "image": true,
+              "solution": true,
               "alt_desc": "The fabled horse question. Run away while you still can. \nPreferably not on horseback."
             }
           }
@@ -260,20 +262,20 @@
           "image": true,
           "alt_desc": "Solutions: https://liverpool.instructure.com/courses/27539/modules/items/301668",
           "children": {
-            "1": {"image": true},
-            "2": {"image": true},
-            "3": {"image": true},
-            "4": {"image": true}
+            "1": {"image": true, "solution": true},
+            "2": {"image": true, "solution": true},
+            "3": {"image": true, "solution": true},
+            "4": {"image": true, "solution": true}
           }
         },
         "5": {
           "image": true,
           "children": {
-            "1": {"image": true},
-            "2": {"image": true},
-            "3": {"image": true},
-            "4": {"image": true},
-            "5": {"image": true}
+            "1": {"image": true, "solution": true},
+            "2": {"image": true, "solution": true},
+            "3": {"image": true, "solution": true},
+            "4": {"image": true, "solution": true},
+            "5": {"image": true, "solution": true}
           }
         },
         "6": {
@@ -308,80 +310,82 @@
         "1": {
           "image": true,
           "children": {
-            "1": {"image": true},
-            "2": {"image": true},
-            "3": {"image": true},
-            "4": {"image": true},
-            "5": {"image": true},
-            "6": {"image": true}
+            "1": {"image": true, "solution": true},
+            "2": {"image": true, "solution": true},
+            "3": {"image": true, "solution": true},
+            "4": {"image": true, "solution": true},
+            "5": {"image": true, "solution": true},
+            "6": {"image": true, "solution": true}
           }
         },
         "2": {
           "image": true,
           "children": {
-            "1": {"image": true},
-            "2": {"image": true},
-            "3": {"image": true},
-            "4": {"image": true},
-            "5": {"image": true},
-            "6": {"image": true},
-            "7": {"image": true},
-            "8": {"image": true},
-            "9": {"image": true},
-            "10": {"image": true},
-            "11": {"image": true},
-            "12": {"image": true},
-            "13": {"image": true}
+            "1": {"image": true, "solution": true},
+            "2": {"image": true, "solution": true},
+            "3": {"image": true, "solution": true},
+            "4": {"image": true, "solution": true},
+            "5": {"image": true, "solution": true},
+            "6": {"image": true, "solution": true},
+            "7": {"image": true, "solution": true},
+            "8": {"image": true, "solution": true},
+            "9": {"image": true, "solution": true},
+            "10": {"image": true, "solution": true},
+            "11": {"image": true, "solution": true},
+            "12": {"image": true, "solution": true},
+            "13": {"image": true, "solution": true}
           }
         },
         "3": {
           "image": true,
           "children": {
-            "1": {"image": true},
-            "2": {"image": true},
-            "3": {"image": true},
-            "4": {"image": true},
-            "5": {"image": true},
-            "6": {"image": true},
-            "7": {"image": true}
+            "1": {"image": true, "solution": true},
+            "2": {"image": true, "solution": true},
+            "3": {"image": true, "solution": true},
+            "4": {"image": true, "solution": true},
+            "5": {"image": true, "solution": true},
+            "6": {"image": true, "solution": true},
+            "7": {"image": true, "solution": true}
           }
         },
         "4": {
           "image": true,
           "children": {
-            "1": {"image": true},
+            "1": {"image": true, "solution": true},
             "2": {
               "image": true,
+              "solution": true,
               "alt_desc": "Link: https://www.bbc.co.uk/ontologies/sport"
             },
             "3": {
               "image": true,
+              "solution": true,
               "alt_desc": "Link: https://www.bbc.co.uk/ontologies/sport"
             },
-            "4": {"image": true},
-            "5": {"image": true},
-            "6": {"image": true},
-            "7": {"image": true}
+            "4": {"image": true, "solution": true},
+            "5": {"image": true, "solution": true},
+            "6": {"image": true, "solution": true},
+            "7": {"image": true, "solution": true}
           }
         },
         "5": {
           "image": true,
           "children": {
-            "1": {"image": true},
-            "2": {"image": true},
+            "1": {"image": true, "solution": true},
+            "2": {"image": true, "solution": true},
             "3": {
               "image": true,
               "children": {
-                "a": {"image": true},
-                "b": {"image": true},
-                "c": {"image": true},
-                "d": {"image": true}
+                "a": {"image": true, "solution": true},
+                "b": {"image": true, "solution": true},
+                "c": {"image": true, "solution": true},
+                "d": {"image": true, "solution": true}
               }
             },
-            "4": {"image": true},
-            "5": {"image": true},
-            "6": {"image": true},
-            "7": {"image": true}
+            "4": {"image": true, "solution": true},
+            "5": {"image": true, "solution": true},
+            "6": {"image": true, "solution": true},
+            "7": {"image": true, "solution": true}
           }
         },
         "6": {
