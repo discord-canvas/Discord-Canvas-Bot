@@ -13,7 +13,7 @@ async function call(msg, args) {
   } catch (err) {
     switch (err.name) {
       case 'TypeError':
-        await msg.channel.send(`${args.join(" ")} is not a answer I know about`)
+        await msg.channel.send(`${args.join(" ")} is not an answer I know about`)
         break
       default:
         console.warn(err)
