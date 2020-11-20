@@ -47,7 +47,7 @@ async function travelTree(curr, args, path, destination) {
 
   // base case
   if (args.length == 1) {
-    if (curr.children[args[0]].children) {
+    if (! curr.children[args[0]].solution) {
       throw TypeError
     }
     await sendNode(destination, curr.children[args[0]], `${path}${args[0]}`)
