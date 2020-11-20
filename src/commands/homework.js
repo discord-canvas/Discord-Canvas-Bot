@@ -6,7 +6,7 @@ const { sendNode, sendImage } = require('../homeworkutils.js')
 
 const homework = JSON.parse(fs.readFileSync('homework.json'))
 
-const call = async function (msg, args) {
+async function call(msg, args) {
   try {
     if (args.length == 0) {
       await sendNode(msg.channel, homework)
