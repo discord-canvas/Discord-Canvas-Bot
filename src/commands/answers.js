@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 
-const { sendNode, sendImage } = require('../homeworkutils.js')
+const {sendImage} = require('../homeworkutils.js')
 
 const homework = JSON.parse(fs.readFileSync('homework.json'))
 
