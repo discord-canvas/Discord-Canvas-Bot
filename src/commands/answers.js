@@ -29,16 +29,18 @@ async function travelTree(curr, args, path, destination) {
     args.unshift(branches.shift())
 
     for (let branch of branches) {
-      await sendNode(destination, curr.children[branch], `${path}${branch}`)
+      if (curr.children[branch].solution) {
+        await sendImage(destination, `${path}${branch}`)
+      }
     }
 
   // check for wildcard operator
   } else if (args[0] == '*') {  // potential for misuse
-    if (curr.image) {
+    if (curr.solution) {
       await sendImage(destination, path.slice(0, path.length-1))
     }
     for (let [name, child] of Object.entries(curr.children).sort((a,b) =>  ''+a[0].localeCompare(b[0]))) {
-      if (child.image) {
+      if (child.solution) {
         await sendImage(destination, `${path}${name}`)
       }
     }
@@ -50,7 +52,7 @@ async function travelTree(curr, args, path, destination) {
     if (! curr.children[args[0]].solution) {
       throw TypeError
     }
-    await sendNode(destination, curr.children[args[0]], `${path}${args[0]}`)
+    await sendImage(destination, `${path}${args[0]}`)
     return
   }
   await travelTree(curr.children[args[0]], args.slice(1),`${path}${args[0]}.`, destination)
