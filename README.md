@@ -23,8 +23,10 @@ Configuration of the bot is done in the `.config.json` file, there is an example
 {
   "api": String, // The base URL of the canvas API
   "course_filter": String, // A regex filter for course names retrieved from /courses
-  "prefix": String, // The bot command prefix (default "ca!"), its what is put before commands e.g. "ca!help"
-  "overrides": [AssignmentOverride] // A list of assignment overrides
+  "question_directory": String?, // Relative path to directory containing questions
+  "prefix": String?, // The bot command prefix (default "ca!"), its what is put before commands e.g. "ca!help"
+  "overrides": [AssignmentOverride]?, // A list of assignment overrides
+  "automated_assignments": [AutomatedAssignment]?, // List of automated assignment channels
 }
 ```
 ```javascript
@@ -32,10 +34,19 @@ Configuration of the bot is done in the `.config.json` file, there is an example
 * Defines extra assignments that will be shown in output
 */
 {
-  "offset": Number, // Offset in ms from start of week (monday 00:00) for when assignment is due
+  "offset": Number, // Offset in ms from start of week (monday 00:00) for when assignment is due (ms)
   "course": String, // Name of course assignment is for
   "name": String, // Name of assignment
-  "points": Number // Number of points assignment is worth
+  "points": Number, // Number of points assignment is worth
+}
+```
+```javascript
+/** AutomatedAssignment
+* Defines channel that will automatically be send upcoming assignments
+*/
+{
+  "offset": Number, // Offset from start of week of when to send message (ms)
+  "channel": String, // Snowflake ID of channel to send to
 }
 ```
 
@@ -53,10 +64,11 @@ This corresponds to the question 1a of exercise 1 from module 111. To represent 
 data HomeworkNode = HomeworkNode {
   alt_desc :: String,
   image :: Bool,
+  solution :: Bool,
   children :: {String: HomeworkNode}
 }
 ```
-If any field is empty, it will not be sent. For example, if we have the JSON: 
+The `solution` field is used by `!answer` to determine if a question is valid for sending (More below). If any field is empty, it will not be sent. For example, if we have the JSON:
 ```json
 {
   "children": {
@@ -78,6 +90,9 @@ If any field is empty, it will not be sent. For example, if we have the JSON:
 If we call `!hw 1` we get a message containing "Example 1", the image called "1.png", and a list of sub-section names, "Subs: a, b".
 If we call `!hw 1 a` we get a message containing only the image called "1.a.png", since that node has not `alt_desc` or `children` properties.
 If we call `!hw 1 b` we get a message containing only "Example 1b: What is the meaning of life?", since that node only has an `alt_desc`.
+
+### The `!answer` command
+Similar to `!homework`, this command returns screenshots of answers to previous questions. It requires a path to a question with `solution: True`. It allows all the special syntax if `!homework`. 
 
 ## How to run
 The bot requires 2 API keys, for canvas and discord. These are set via environment variables (you can also use dotenv).
