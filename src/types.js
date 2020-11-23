@@ -139,8 +139,8 @@ const ConfigAutomatedAssignment = Object.freeze({
 const Config = Object.freeze({
   api: TypeOrDefault(String, 'https://instructure.com/api/v1'),
   course_filter: TypeOrDefault(String, '(.*)'),
-  question_directory: "questions/",
-  answer_directory: "answers/",
+  question_directory: TypeOrDefault(String, "questions/"),
+  answer_directory: TypeOrDefault(String, "answers/"),
   prefix: TypeOrDefault(String, 'ca!'),
   overrides: [ConfigOverride],
   automated_assignments: [ConfigAutomatedAssignment],
