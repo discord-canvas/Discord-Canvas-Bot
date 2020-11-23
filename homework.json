@@ -49,9 +49,11 @@
           "alt_desc": "Week 2 Homework Sheet: \n\thttps://liverpool.instructure.com/courses/17018/files/1289791/download?wrap=1\nSolutions\n\thttps://liverpool.instructure.com/courses/17018/files/1280750/download?wrap=1",
           "children": {
             "ifs": {
-              "1": {"image": true, "solution": true},
-              "2": {"image": true, "solution": true},
-              "3": {"image": true, "solution": true}
+              "children": {
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true}
+              }
             },
             "let-expressions": {
               "image": true,
