@@ -188,26 +188,26 @@
           "children": {
             "fold": {
               "children": {
-                "1": {"image": true},
-                "2": {"image": true},
-                "3": {"image": true},
-                "4": {"image": true}
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true},
+                "4": {"image": true, "solution": true}
               }
             },
             "scan": {"image": true},
             "takewhile-and-dropwhile": {
               "children": {
-                "1": {"image": true},
-                "2": {"image": true},
-                "3": {"image": true}
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true}
 
               }
             },
             "zipwith": {
               "children": {
-                "1": {"image": true},
-                "2": {"image": true},
-                "3": {"image": true}
+                "1": {"image": true, "solution": true},
+                "2": {"image": true, "solution": true},
+                "3": {"image": true, "solution": true}
               }
             }
           }
