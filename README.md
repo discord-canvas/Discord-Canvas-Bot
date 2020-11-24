@@ -24,6 +24,7 @@ Configuration of the bot is done in the `.config.json` file, there is an example
   "api": String, // The base URL of the canvas API
   "course_filter": String, // A regex filter for course names retrieved from /courses
   "question_directory": String?, // Relative path to directory containing questions
+  "answer_directory": String?, // Relative path to directory containing answers
   "prefix": String?, // The bot command prefix (default "ca!"), its what is put before commands e.g. "ca!help"
   "overrides": [AssignmentOverride]?, // A list of assignment overrides
   "automated_assignments": [AutomatedAssignment]?, // List of automated assignment channels
