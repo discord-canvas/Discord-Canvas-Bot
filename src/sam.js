@@ -32,6 +32,8 @@ const post = function(url, sessionCookie, body) {
 /**
 * getCourses
 * fetch and parse a list available courses
+* @param {String} sessionCookie - Your SAM login session cookie
+* @returns {Array.<String>} list of module names
 */
 const getCourses = exports.getCourses = async function(sessionCookie) {
   const res = await get(URL, sessionCookie);
@@ -52,6 +54,13 @@ const getCourses = exports.getCourses = async function(sessionCookie) {
   return modules;
 }
 
+/**
+* getCourseAssignments
+* fetch and parse the list of assignmens for given module
+* @param {String} sessionCookie - Your SAM login session cookie
+* @param {String} course - Name of module
+* @returns {Array.<Assignment>} assignments for given module
+*/
 const getCourseAssignments = exports.getCourseAssignments = async function(sessionCookie, course) {
   const res = await post(URL, sessionCookie, `qryModule=${encodeURIComponent(course)}`);
   const text = await res.text();
