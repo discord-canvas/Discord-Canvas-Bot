@@ -114,7 +114,17 @@ class Canvas {
       let due = Date.parse(d.lock_at);
       let dueDate = new Date();
       dueDate.setTime(due);
-      return {id: d.id, name: d.title, course: courseID, desc: d.message, due, dueDate, points: 0, url: d.html_url };
+      return {id: d.id, name: d.title, course: courseID, due, dueDate, points: 0, url: d.html_url };
+    });
+  }
+
+  async getCourseQuizzes(courseID) {
+    const quizzes = await req.getPaginated(`${this.api}/courses/${courseID}/quizzes`, this.token);
+    return quizzes.filter(d => d.lock_at !== null).map(d => {
+      let due = Date.parse(d.due_at);
+      let dueDate = new Date();
+      dueDate.setTime(due);
+      return {id: d.id, name: d.title, course: courseID, due, dueDate, points: d.points_possible, url: d.html_url };
     })
   }
 

@@ -33,6 +33,7 @@ class CanvasUtils {
     for (let courseID in courses) {
       promises.push(this.canvas.getCourseAssignments(courseID));
       promises.push(this.canvas.getCourseDiscussions(courseID));
+      promises.push(this.canvas.getCourseQuizzes(courseID));
     }
     const assignments = (await Promise.all(promises)).flat();
     return { courses, assignments };
