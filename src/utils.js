@@ -114,3 +114,42 @@ exports.assignmentsSame = function(a, b) {
   }
   return true;
 }
+
+/**
+* NOP
+*/
+exports.nop = function() {}
+
+/**
+* returns only the result of resolved promises
+* @async
+* @param {Iterable.<AsyncFunction>} promises - Promises to wait for
+* @param {Function} onError - Function to call on error
+*/
+exports.allResolved = function(promises, onError) {
+  let count = 0, size = promises.length, responses = new Array(size);
+  onError = onError || exports.nop;
+  return new Promise((resolve) => {
+    if (size === 0) return resolve([]);
+    const checkResolve = function() {
+      count += 1;
+      if (count >= size) resolve(responses.filter(v => v !== undefined));
+    }
+    for (let i=0;i<size;i++) {
+      promises[i].then(function() {
+        let res = Array.from(arguments);
+        if (res.length === 0) res = undefined;
+        if (res.length === 1) res = res[0];
+        responses[i] = res;
+        checkResolve();
+      }).catch(function() {
+        try {
+          onError.apply(this, arguments);
+        } catch(e) {
+          console.warn(e);
+        }
+        checkResolve();
+      });
+    }
+  });
+}

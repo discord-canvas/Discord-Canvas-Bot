@@ -33,7 +33,7 @@ const req = Object.freeze({
     let cond = true
     while (cond) {
       const res = await req.get(url, auth, headers);
-      if (!res.ok) throw new Error(`Fetch error ${res.status} ${res.statusText}`);
+      if (!res.ok) throw new Error(`Fetch error ${res.status} ${res.statusText} ${res.url}`);
       responses.push(await res.json());
       let links = parseLinks(res.headers.get('Link'));
 

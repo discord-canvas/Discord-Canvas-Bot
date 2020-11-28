@@ -3,7 +3,7 @@
 const { performance } = require('perf_hooks');
 
 const { Week, enforceType } = require('./types.js');
-const { getWeekTimes } = require('./utils.js');
+const { getWeekTimes, allResolved } = require('./utils.js');
 
 const UPDATE_TIME = 15 * 60 * 1000;
 
@@ -35,7 +35,7 @@ class CanvasUtils {
       promises.push(this.canvas.getCourseDiscussions(courseID));
       promises.push(this.canvas.getCourseQuizzes(courseID));
     }
-    const assignments = (await Promise.all(promises)).flat();
+    const assignments = (await allResolved(promises)).flat();
     return { courses, assignments };
   }
 
