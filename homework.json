@@ -514,7 +514,7 @@
         },
         "6": {
           "image": true,
-          "alt_desc": "Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17569/files/1367435/download?wrap=1",
+          "alt_desc": "Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17569/files/1367435/download?wrap=1\nSolutions:\n\thttps://liverpool.instructure.com/courses/17569/files/1416854/download?wrap=1",
           "children": {
             "1": {
               "image": true,
@@ -541,7 +541,7 @@
         },
         "7": {
           "image": true,
-          "alt_desc": "Homework Sheet: https://liverpool.instructure.com/courses/17569/files/1410443/download?wrap=1",
+          "alt_desc": "Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17569/files/1410443/download?wrap=1\nSolutions:\n\tNot Released",
           "children": {
             "1": {"image": true},
             "2": {
@@ -552,6 +552,18 @@
                 "3": {"image": true},
                 "4": {"image": true}
               }
+            },
+            "3": {"image": true},
+            "4": {"image": true},
+            "5": {"image": true}
+          }
+        },
+        "8": {
+          "image": true,
+          "alt_desc": "Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17569/files/1410444/download?wrap=1\nSolutions:\n\tNot Released",
+          "children": {
+            "1": {"image": true},
+            "2": {"image": true}
             },
             "3": {"image": true},
             "4": {"image": true},
