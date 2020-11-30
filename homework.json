@@ -217,6 +217,7 @@
           "children": {
             "custom-types": {
               "image": true,
+              "solution": true,
               "children": {
                 "1": {"image": true},
                 "2": {"image": true},
@@ -227,6 +228,7 @@
             },
             "types-with-data": {
               "image": true,
+              "solution": true,
               "children": {
                 "1": {"image": true},
                 "2": {"image": true},
@@ -236,6 +238,7 @@
               }
             },
             "maybe": {
+            "solution": true,
               "children": {
                 "1": {"image": true},
                 "2": {"image": true},
@@ -243,6 +246,7 @@
               }
             },
             "either": {
+            "solution": true,
               "children": {
                 "1": {"image": true},
                 "2": {"image": true},
@@ -323,24 +327,24 @@
           "image": true,
           "alt_desc": "Homework Sheet:\n\thttps://liverpool.instructure.com/courses/27539/files/1384532/download?wrap=1",
           "children": {
-            "1": {"image": true},
+            "1": {"image": true, "solution": true},
             "2": {
               "image": true,
               "children": {
-                "a": {"image": true},
-                "b": {"image": true},
-                "c": {"image": true}
+                "a": {"image": true, "solution": true},
+                "b": {"image": true, "solution": true},
+                "c": {"image": true, "solution": true}
               }
             },
             "3": {
               "image": true,
               "children": {
-                "a": {"image": true},
-                "b": {"image": true}
+                "a": {"image": true, "solution": true},
+                "b": {"image": true, "solution": true}
               }
             },
-            "4": {"image": true},
-            "5": {"image": true}
+            "4": {"image": true, "solution": true},
+            "5": {"image": true, "solution": true}
           }
         },
         "7":
@@ -456,24 +460,24 @@
             "1": {
               "image": true,
               "children": {
-                "a": {"image": true},
-                "b": {"image": true},
-                "c": {"image": true},
-                "d": {"image": true}
+                "a": {"image": true, "solution": true},
+                "b": {"image": true, "solution": true},
+                "c": {"image": true, "solution": true},
+                "d": {"image": true, "solution": true}
               }
             },
-            "2": {"image": true},
+            "2": {"image": true, "solution": true},
             "3": {
               "image": true,
               "children": {
-                "a": {"image": true},
-                "b": {"image": true},
-                "c": {"image": true},
-                "d": {"image": true},
-                "e": {"image": true}
+                "a": {"image": true, "solution": true},
+                "b": {"image": true, "solution": true},
+                "c": {"image": true, "solution": true},
+                "d": {"image": true, "solution": true},
+                "e": {"image": true, "solution": true}
               }
             },
-            "4": {"image": true}
+            "4": {"image": true, "solution": true}
           }
         },
         "7": {
