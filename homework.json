@@ -408,23 +408,26 @@
           "image": true,
           "children": {
             "1": {
-              "a": {"image": true},
-              "b": {"image": true},
-              "c": {"image": true}
-            }
-          },
-          "2": {"image": true},
-          "3": {"image": true},
-          "4": {
-            "image": true,
-            "children": {
-              "a": {"image": true},
-              "b": {"image": true},
-              "c": {"image": true},
-              "d": {"image": true}
-            }
-          },
-          "5": {"image": true}
+              "image": true,
+              "children" : {
+                "a": {"image": true},
+                "b": {"image": true},
+                "c": {"image": true}
+              }
+            },
+            "2": {"image": true},
+            "3": {"image": true},
+            "4": {
+              "image": true,
+              "children": {
+                "a": {"image": true},
+                "b": {"image": true},
+                "c": {"image": true},
+                "d": {"image": true}
+              }
+            },
+            "5": {"image": true}
+          }
         }
       }
     },
@@ -563,8 +566,7 @@
           "alt_desc": "Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17569/files/1410444/download?wrap=1\nSolutions:\n\tNot Released",
           "children": {
             "1": {"image": true},
-            "2": {"image": true}
-            },
+            "2": {"image": true},
             "3": {"image": true},
             "4": {"image": true},
             "5": {"image": true}
