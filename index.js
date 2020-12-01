@@ -21,22 +21,24 @@ async function awaitClose(child) {
   });
 }
 
-const REPO='http://github.com/discord-canvas/Discord-Canvas'; // TODO: Get this from git
+const REMOTE = process.env.GIT_REMOTE || 'origin';
+const BRANCH = process.env.GIT_BRANCH || 'master';
 
 async function doUpdate(child, message) {
   const git = simpleGit({
     baseDir: __dirname,
   });
   const log = await git.log();
+  const repo = (await git.remote(['get-url',REMOTE])).trim().replace(/\.git$/,'');
   const status = await git.status();
   if (!status.isClean()) {
-    child.send({ t: 'edit', msg: message.msg, chan: message.chan, content: `Unable to update, some files have been changed. Staying at <${REPO}/commit/${log.latest.hash}>`});
+    child.send({ t: 'edit', msg: message.msg, chan: message.chan, content: `Unable to update, some files have been changed. Staying at <${repo}/commit/${log.latest.hash}>`});
     return;
   }
   console.log('Closing old client...');
   await awaitClose(child);
   if (!child.killed) child.kill('SIGKILL');
-  await git.checkout(process.env.GIT_BRANCH || 'master');
+  await git.checkout(BRANCH);
   console.log('Starting update...');
   let error, newLog;
   try {
@@ -45,7 +47,7 @@ async function doUpdate(child, message) {
   } catch(e) {
     console.warn(e);
     await git.checkout(log.latest.hash);
-    error = `Error downloading updates, reverting to old version <${REPO}/commit/${log.latest.hash}>`;
+    error = `Error downloading updates, reverting to old version <${repo}/commit/${log.latest.hash}>`;
   }
   if (error === undefined) {
     try {
@@ -53,7 +55,7 @@ async function doUpdate(child, message) {
     } catch(e) {
       console.warn(e);
       await git.checkout(log.latest.hash);
-      error = `Error installing dependencies, reverting to old version <${REPO}/commit/${log.latest.has}>`;
+      error = `Error installing dependencies, reverting to old version <${repo}/commit/${log.latest.has}>`;
     }
   }
   console.log('Update done, starting client');
@@ -62,11 +64,11 @@ async function doUpdate(child, message) {
     if (error === undefined) {
       if (log.latest.hash !== newLog.latest.hash) {
         newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan,
-          content: `Succesfully updated, <${REPO}/compare/${newLog.latest.hash}..${log.latest.hash}>`,
+          content: `Succesfully updated, <${repo}/compare/${newLog.latest.hash}..${log.latest.hash}>`,
         });
       } else {
         newChild.emit('send', { t: 'edit', msg: message.msg, chan: message.chan,
-          content: `Nothing to update, still at <${REPO}/commit/${newLog.latest.hash}>`,
+          content: `Nothing to update, still at <${repo}/commit/${newLog.latest.hash}>`,
        });
       }
     } else {
@@ -117,7 +119,7 @@ start();
 async function _shutdown() {
   if (activeChild !== undefined) {
     console.log('Closing client...');
-    await awaitClose(activeChild); 
+    await awaitClose(activeChild);
     console.log('Client closed');
   }
   process.exit(0);
