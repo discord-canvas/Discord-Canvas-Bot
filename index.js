@@ -35,7 +35,15 @@ async function doUpdate(child, message) {
   await doNpmInstall();
   const newChild = start();
   newChild.once('ready', function() {
-    newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan, content: `Succesfully updated from \`${log.latest.hash}\` to \`${newLog.latest.hash}\``});
+    if (log.latest.hash !== newLog.latest.hash) {
+      newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan,
+        content: `Succesfully updated from \`${log.latest.hash}\` to \`${newLog.latest.hash}\``,
+      });
+    } else {
+      newChild.emit('send', { t: 'edit', msg: message.msg, chan: message.chan,
+        content: `Nothing to update, still at <https://github.com/discord-canvas/Discord-Canvas-Bot/commit/${newLog.latest.hash}>`,
+     });
+    }
   });
 }
 
