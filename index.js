@@ -16,6 +16,8 @@ async function awaitClose(child) {
   });
 }
 
+const REPO='http://github.com/discord-canvas/Discord-Canvas'; // TODO: Get this from git
+
 async function doUpdate(child, message) {
   const git = simpleGit({
     baseDir: __dirname,
@@ -29,20 +31,41 @@ async function doUpdate(child, message) {
   console.log('Closing old client...');
   await awaitClose(child);
   if (!child.killed) child.kill('SIGKILL');
+  await git.checkout('master'); // TODO: Make branch configurable
   console.log('Starting update...');
-  await git.pull();
-  const newLog = await git.log();
-  await doNpmInstall();
+  let error;
+  try {
+    await git.pull();
+    const newLog = await git.log();
+  } catch(e) {
+    console.warn(e);
+    await git.checkout(log.latest.hash);
+    error = `Error downloading updates, reverting to old version <${REPO}/commit/${log.latest.hash}>`;
+  }
+  if (error !== undefined) {
+    try {
+      await doNpmInstall();
+    } catch(e) {
+      console.warn(e);
+      await git.checkout(log.latest.hash);
+      error = `Error installing dependencies, reverting to old version <${REPO}/commit/${log.latest.has}>`;
+    }
+  }
+  console.log('Update done, starting client');
   const newChild = start();
   newChild.once('ready', function() {
-    if (log.latest.hash !== newLog.latest.hash) {
-      newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan,
-        content: `Succesfully updated, <https://github.com/discord-canvas/Discord-Canvas-Bot/compare/${newLog.latest.hash}..${log.latest.hash}>`,
-      });
+    if (error === undefined) {
+      if (log.latest.hash !== newLog.latest.hash) {
+        newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan,
+          content: `Succesfully updated, <${REPO}/compare/${newLog.latest.hash}..${log.latest.hash}>`,
+        });
+      } else {
+        newChild.emit('send', { t: 'edit', msg: message.msg, chan: message.chan,
+          content: `Nothing to update, still at <${REPO}/commit/${newLog.latest.hash}>`,
+       });
+      }
     } else {
-      newChild.emit('send', { t: 'edit', msg: message.msg, chan: message.chan,
-        content: `Nothing to update, still at <https://github.com/discord-canvas/Discord-Canvas-Bot/commit/${newLog.latest.hash}>`,
-     });
+      newChild.emit('send', { t: 'edit', msg: message.msg, chan: message.chan, content: error.toString() });
     }
   });
 }
