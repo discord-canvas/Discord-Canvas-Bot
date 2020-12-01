@@ -171,6 +171,7 @@ let hasShutdown = true;
 
 function shutdown() {
   if (hasShutdown) return;
+  hasShutdown = true;
   const shardCount = client.ws.shards.size;
   console.log(`Shutting down ${shardCount} shards`);
   let shardsDestroyed = 0, closed = false;
