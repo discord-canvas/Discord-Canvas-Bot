@@ -8,7 +8,7 @@ async function call(msg) {
   const memoryUsage = process.memoryUsage();
   await msg.channel.send({embed: {
     title: `${msg.client.user.username} info`,
-    color: 0xff0000,
+    color: EMBED_COLOR,
     fields: [
       {
         name: 'INFO', inline: true,
