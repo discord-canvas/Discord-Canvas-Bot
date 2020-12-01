@@ -48,7 +48,7 @@ async function doUpdate(child, message) {
     await git.checkout(log.latest.hash);
     error = `Error downloading updates, reverting to old version <${REPO}/commit/${log.latest.hash}>`;
   }
-  if (error !== undefined) {
+  if (error === undefined) {
     try {
       await doNpmInstall();
     } catch(e) {
