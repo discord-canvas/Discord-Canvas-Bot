@@ -157,11 +157,7 @@ process.on('message', asyncWrap(async function(message) {
       break;
     }
     case 'close': {
-      client.destroy();
-      client.db.close(function(err) {
-        if (err) console.error(err);
-        process.exit(0);
-      });
+      shutdown();
       break;
     }
   }
@@ -171,13 +167,40 @@ process.on('message', asyncWrap(async function(message) {
 *** Startup
 *******************************************************************************/
 
+let hasShutdown = true;
+
+function shutdown() {
+  if (hasShutdown) return;
+  const shardCount = client.ws.shards.size;
+  console.log(`Shutting down ${shardCount} shards`);
+  let shardsDestroyed = 0, closed = false;
+  client.on('shardDisconnect', function() {
+    if (shardsDestroyed++ >= shardCount && !closed) {
+      closed = true;
+      console.log('All shards closed shutting down db');
+      client.db.close(function(err) {
+        if (err) {
+          console.error(err);
+          return process.exit(50);
+        }
+        process.exit(0);
+      });
+    }
+  });
+  client.destroy();
+}
+
 if (require.main === module) {
   const DISCORD_TOKEN = process.env.DISCORD_TOKEN || process.env.BOT_TOKEN || '';
   const CANVAS_TOKEN = process.env.CANVAS_TOKEN || '';
   const CONFIG = require('../.config.json');
 
+  hasShutdown = false;
   startBot(DISCORD_TOKEN, CANVAS_TOKEN, CONFIG).then(null, function() {
     console.error.apply(this, arguments);
     process.exit(1);
   });
 }
+
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
