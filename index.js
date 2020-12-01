@@ -8,9 +8,14 @@ const simpleGit = require('simple-git');
 const path = require('path');
 const { asyncWrap } = require('./src/utils.js');
 
+let activeChild;
+
 async function awaitClose(child) {
   return new Promise((resolve) => {
-    child.once('exit', resolve);
+    child.once('exit', function() {
+      activeChild = undefined;
+      return resolve.apply(this, arguments);
+    });
     child.send({t: 'close'});
     child.disconnect();
   });
@@ -25,18 +30,18 @@ async function doUpdate(child, message) {
   const log = await git.log();
   const status = await git.status();
   if (!status.isClean()) {
-    child.send({ t: 'edit', msg: message.msg, chan: message.chan, content: `Unable to update from \`${log.latest.hash}\`: repo not clean`});
+    child.send({ t: 'edit', msg: message.msg, chan: message.chan, content: `Unable to update, some files have been changed. Staying at <${REPO}/commit/${log.latest.hash}>`});
     return;
   }
   console.log('Closing old client...');
   await awaitClose(child);
   if (!child.killed) child.kill('SIGKILL');
-  await git.checkout('master'); // TODO: Make branch configurable
+  await git.checkout(process.env.GIT_BRANCH || 'master');
   console.log('Starting update...');
-  let error;
+  let error, newLog;
   try {
     await git.pull();
-    const newLog = await git.log();
+    newLog = await git.log();
   } catch(e) {
     console.warn(e);
     await git.checkout(log.latest.hash);
@@ -86,6 +91,7 @@ function doNpmInstall() {
 }
 
 function start() {
+  if (activeChild !== undefined) throw new Error('A client already exists, cannot start');
   const events = new EventEmitter();
   const child = spawn(process.argv0, [`${__dirname}/src/index.js`], {
     cwd: __dirname,
@@ -101,8 +107,25 @@ function start() {
   events.on('update', asyncWrap(doUpdate) );
   events.on('send', function(message) {
     child.send(message);
-  })
+  });
+  activeChild = child;
   return events;
 }
 
 start();
+
+async function _shutdown() {
+  if (activeChild !== undefined) {
+    console.log('Closing client...');
+    await awaitClose(activeChild); 
+    console.log('Client closed');
+  }
+  process.exit(0);
+}
+
+function shutdown() {
+  _shutdown.apply(this, arguments).then(null, console.error);
+}
+
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
