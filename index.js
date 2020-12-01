@@ -37,7 +37,7 @@ async function doUpdate(child, message) {
   newChild.once('ready', function() {
     if (log.latest.hash !== newLog.latest.hash) {
       newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan,
-        content: `Succesfully updated from \`${log.latest.hash}\` to \`${newLog.latest.hash}\``,
+        content: `Succesfully updated, <https://github.com/discord-canvas/Discord-Canvas-Bot/compare/${newLog.latest.hash}..${log.latest.hash}>`,
       });
     } else {
       newChild.emit('send', { t: 'edit', msg: message.msg, chan: message.chan,
