@@ -259,11 +259,13 @@
           "alt_desc": "Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17018/files/1438434/download?wrap=1\nSolutions:\n\tNot Released",
           "children": {
             "getline-and-putstrln": {
-              "1": {"image": true},
-              "2": {"image": true},
-              "3": {"image": true},
-              "4": {"image": true},
-              "5": {"image": true}
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true},
+                "3": {"image": true},
+                "4": {"image": true},
+                "5": {"image": true}
+              }
             },
             "let-in-do-blocks": {
               "image": true,
