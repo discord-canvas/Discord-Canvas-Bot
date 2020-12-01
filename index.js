@@ -50,7 +50,6 @@ async function doUpdate(child, message) {
   if (error === undefined) {
     try {
       await doNpmInstall();
-      throw new Error('test');
     } catch(e) {
       console.warn(e);
       await git.checkout(log.latest.hash);
