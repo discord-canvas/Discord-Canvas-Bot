@@ -1,4 +1,4 @@
-'use strict';
+use strict';
 
 require('dotenv').config();
 
@@ -41,6 +41,7 @@ async function doUpdate(child, message) {
   let error, newLog;
   try {
     await git.pull();
+    throw new Error('test');
     newLog = await git.log();
   } catch(e) {
     console.warn(e);
