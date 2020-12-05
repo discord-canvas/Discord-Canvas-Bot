@@ -20,8 +20,9 @@ function parseAssignments(week, assignments, courses) {
 }
 
 class CanvasUtils {
-  constructor(canvas, overrides) {
+  constructor(canvas, sam, overrides) {
     this.canvas = canvas;
+    this.sam = sam;
     this.overrides = overrides;
     this.lastUpdate = undefined;
     this.cache = undefined;
@@ -34,7 +35,14 @@ class CanvasUtils {
       promises.push(this.canvas.getCourseAssignments(courseID));
       promises.push(this.canvas.getCourseDiscussions(courseID));
     }
-    const assignments = (await Promise.all(promises)).flat();
+    let assignments = (await Promise.all(promises)).flat();
+    const samCourses = await this.sam.getFilteredCourses();
+    promises = [];
+    for (let courseID of samCourses) {
+      promises.push(this.sam.getCourseAssignments(courseID));
+      courses[courseID] = courseID;
+    }
+    assignments = assignments.concat((await Promise.all(promises)).flat());
     return { courses, assignments };
   }
 

@@ -5,6 +5,7 @@ const { Client } = require('discord.js-light');
 const sqlite3 = require('sqlite3');
 
 const Canvas = require('./canvas.js');
+const Sam = require('./sam.js');
 const CanvasUtils = require('./canvasutils.js');
 const { assignmentAutoUpdate } = require('./autoupdate.js');
 const { asyncWrap, unwrapSync, ipcSend } = require('./utils.js');
@@ -98,13 +99,14 @@ function awaitOpen(database) {
   });
 }
 
-const startBot = module.exports = async function(botToken, canvasToken, config) {
+const startBot = module.exports = async function(botToken, canvasToken, samToken, config) {
   const db = new sqlite3.Database(DB_NAME, sqlite3.OPEN_READWRITE);
   await awaitOpen(db);
   db.on('error', console.error);
   config = enforceType(Config, config);
   const canvas = new Canvas(canvasToken, config);
-  const canvasUtils = new CanvasUtils(canvas, config.overrides);
+  const sam = new Sam(samToken, config);
+  const canvasUtils = new CanvasUtils(canvas, sam, config.overrides);
   Object.defineProperties(client, {
     config: {
       configurable: false,
@@ -174,9 +176,10 @@ process.on('message', asyncWrap(async function(message) {
 if (require.main === module) {
   const DISCORD_TOKEN = process.env.DISCORD_TOKEN || process.env.BOT_TOKEN || '';
   const CANVAS_TOKEN = process.env.CANVAS_TOKEN || '';
+  const SAM_TOKEN = process.env.SAM_TOKEN || '';
   const CONFIG = require('../.config.json');
 
-  startBot(DISCORD_TOKEN, CANVAS_TOKEN, CONFIG).then(null, function() {
+  startBot(DISCORD_TOKEN, CANVAS_TOKEN, SAM_TOKEN, CONFIG).then(null, function() {
     console.error.apply(this, arguments);
     process.exit(1);
   });

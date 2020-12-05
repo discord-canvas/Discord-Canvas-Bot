@@ -29,30 +29,48 @@ const post = function(url, sessionCookie, body) {
 }
 
 
+class Sam {
+  constructor(token, options) {
+    if (typeof token !== 'string' || token.length === 0) throw new Error('Invalid API token');
+    this.token = token;
+    this.options = options || {};
+  }
+}
+
 /**
 * getCourses
 * fetch and parse a list available courses
 * @param {String} sessionCookie - Your SAM login session cookie
 * @returns {Array.<String>} list of module names
 */
-const getCourses = exports.getCourses = async function(sessionCookie) {
-  const res = await get(URL, sessionCookie);
+const getCourses = async function() {
+  const res = await get(URL, this.token);
   const text = await res.text();
 
   const html = HTMLParser.parse(text, OPTS_HTML_PARSE);
-  console.log(html);
 
   const moduleSelect = html.querySelector('select[NAME="qryModule"]');
   if (moduleSelect === null) throw new Error('Could not find modules');
 
-  console.log(moduleSelect);
-
   const moduleElements = moduleSelect.querySelectorAll('OPTION');
-  console.log(moduleElements);
 
   const modules = moduleElements.map(el => el.getAttribute('VALUE'));
   return modules;
 }
+Sam.prototype.getCourses = getCourses;
+
+
+/**
+* getFilteredCourses
+* fetch a list of available courses and filter them
+*/
+const getFilteredCourses = async function() {
+  const courses = await this.getCourses();
+  const regex = new RegExp(this.options.sam_course_filter, 'g');
+  return courses.filter(course => course.match(regex) !== null);
+}
+Sam.prototype.getFilteredCourses = getFilteredCourses;
+
 
 /**
 * getCourseAssignments
@@ -61,15 +79,13 @@ const getCourses = exports.getCourses = async function(sessionCookie) {
 * @param {String} course - Name of module
 * @returns {Array.<Assignment>} assignments for given module
 */
-const getCourseAssignments = exports.getCourseAssignments = async function(sessionCookie, course) {
-  const res = await post(URL, sessionCookie, `qryModule=${encodeURIComponent(course)}`);
+const getCourseAssignments = async function(course) {
+  const res = await post(URL, this.token, `qryModule=${encodeURIComponent(course)}`);
   const text = await res.text();
 
   const html = HTMLParser.parse(text, OPTS_HTML_PARSE);
-  console.log(html);
 
   const assignmentRows = html.querySelectorAll('TABLE.general TR');
-  console.log(assignmentRows);
 
   const assignmentData = assignmentRows.map(el => el.querySelectorAll('TD')).filter(d => d.length === 4);
 
@@ -83,3 +99,6 @@ const getCourseAssignments = exports.getCourseAssignments = async function(sessi
     return { id: `SAM-${course}-${id}`, name: name.replace(RE_NBSP,'').trim(), course, due: dueDate.getTime(), dueDate, points: 1, url };
   })
 }
+Sam.prototype.getCourseAssignments = getCourseAssignments;
+
+module.exports = Sam;
