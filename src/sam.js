@@ -90,7 +90,7 @@ const getCourseAssignments = async function(course) {
   const assignmentData = assignmentRows.map(el => el.querySelectorAll('TD')).filter(d => d.length === 4);
 
   return assignmentData.map(td => {
-    const [course, professor] = td[0].structuredText.split('\n');
+    const [course] = td[0].structuredText.split('\n');
     const [id, name] = td[1].structuredText.split('\n');
     const due = td[2].structuredText;
     const a = td[3].querySelector('A');
