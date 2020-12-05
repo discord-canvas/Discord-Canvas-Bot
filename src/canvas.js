@@ -2,6 +2,8 @@
 
 const fetch = require("node-fetch");
 
+const { USER_AGENT } = require('./constants.js');
+
 const PAGE_LENGTH = 50;
 
 const RE_LINKURL = /<([^>]+)>/g;
@@ -13,6 +15,7 @@ const req = Object.freeze({
   'get': async function(url, auth, headers) {
     if (!headers) headers = {};
     headers['Authorization'] = `Bearer ${auth}`;
+    if (!('User-Agent' in headers)) headers['User-Agent'] = USER_AGENT;
     console.log('GET', String(url));
     const res = await fetch(url, {headers});
     bucket.remaining = parseFloat(res.headers.get('X-Rate-Limit-Remaining'));

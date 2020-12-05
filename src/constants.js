@@ -12,3 +12,16 @@ exports.BOT_PRESENCE = Object.freeze({ status: 'online', activity: { type: 'WATC
 exports.DB_NAME = '.store.db';
 
 exports.EMBED_COLOR = 0xff0000;
+
+exports.USER_AGENT = 'DiscordCanvasBot/1.0';
+
+exports.OPTS_HTML_PARSE = Object.freeze({
+  lowerCaseTagNames: false,
+  comment: false,
+  blockTextElements: {
+    script: false,
+    noscript: false,
+    style: false,
+    pre: true
+  }
+});

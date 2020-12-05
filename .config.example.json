@@ -1,6 +1,7 @@
 {
   "api": "https://liverpool.instructure.com/api/v1",
   "course_filter": "^202021-(COMP[0-9]+)",
+  "sam_course_filter": "^COMP1",
   "prefix": "ca!",
   "question_directory": "questions/",
   "answer_directory": "answers/",
