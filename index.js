@@ -8,34 +8,72 @@ const simpleGit = require('simple-git');
 const path = require('path');
 const { asyncWrap } = require('./src/utils.js');
 
+let activeChild;
+
 async function awaitClose(child) {
   return new Promise((resolve) => {
-    child.once('exit', resolve);
+    child.once('exit', function() {
+      activeChild = undefined;
+      return resolve.apply(this, arguments);
+    });
     child.send({t: 'close'});
     child.disconnect();
   });
 }
+
+const REMOTE = process.env.GIT_REMOTE || 'origin';
+const BRANCH = process.env.GIT_BRANCH || 'master';
 
 async function doUpdate(child, message) {
   const git = simpleGit({
     baseDir: __dirname,
   });
   const log = await git.log();
+  const repo = (await git.remote(['get-url',REMOTE])).trim().replace(/\.git$/,'');
   const status = await git.status();
   if (!status.isClean()) {
-    child.send({ t: 'edit', msg: message.msg, chan: message.chan, content: `Unable to update from \`${log.latest.hash}\`: repo not clean`});
+    child.send({ t: 'edit', msg: message.msg, chan: message.chan, content: `Unable to update, some files have been changed. Staying at <${repo}/commit/${log.latest.hash}>`});
     return;
   }
   console.log('Closing old client...');
   await awaitClose(child);
   if (!child.killed) child.kill('SIGKILL');
+  await git.checkout(BRANCH);
   console.log('Starting update...');
-  await git.pull();
-  const newLog = await git.log();
-  await doNpmInstall();
+  let error, newLog;
+  try {
+    await git.pull();
+    newLog = await git.log();
+  } catch(e) {
+    console.warn(e);
+    await git.checkout(log.latest.hash);
+    error = `Error downloading updates, reverting to old version <${repo}/commit/${log.latest.hash}>`;
+  }
+  if (error === undefined) {
+    try {
+      await doNpmInstall();
+    } catch(e) {
+      console.warn(e);
+      await git.checkout(log.latest.hash);
+      error = `Error installing dependencies, reverting to old version <${repo}/commit/${log.latest.has}>`;
+    }
+  }
+  console.log('Update done, starting client');
   const newChild = start();
   newChild.once('ready', function() {
-    newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan, content: `Succesfully updated from \`${log.latest.hash}\` to \`${newLog.latest.hash}\``});
+    if (error === undefined) {
+      if (log.latest.hash !== newLog.latest.hash) {
+        newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan,
+          content: `Succesfully updated, <${repo}/compare/${newLog.latest.hash}..${log.latest.hash}>`,
+        });
+      } else {
+        newChild.emit('send', { t: 'edit', msg: message.msg, chan: message.chan,
+          content: `Nothing to update, still at <${repo}/commit/${newLog.latest.hash}>`,
+       });
+      }
+    } else {
+      newChild.emit('send', { t: 'edit', msg: message.msg, chan: message.chan, content: error.toString() });
+    }
   });
 }
 
@@ -55,6 +93,7 @@ function doNpmInstall() {
 }
 
 function start() {
+  if (activeChild !== undefined) throw new Error('A client already exists, cannot start');
   const events = new EventEmitter();
   const child = spawn(process.argv0, [`${__dirname}/src/index.js`], {
     cwd: __dirname,
@@ -70,8 +109,25 @@ function start() {
   events.on('update', asyncWrap(doUpdate) );
   events.on('send', function(message) {
     child.send(message);
-  })
+  });
+  activeChild = child;
   return events;
 }
 
 start();
+
+async function _shutdown() {
+  if (activeChild !== undefined) {
+    console.log('Closing client...');
+    await awaitClose(activeChild);
+    console.log('Client closed');
+  }
+  process.exit(0);
+}
+
+function shutdown() {
+  _shutdown.apply(this, arguments).then(null, console.error);
+}
+
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);

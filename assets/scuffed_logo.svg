@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="800"
+   height="800"
+   viewBox="0 0 800 800"
+   version="1.1"
+   id="svg8">
+  <defs
+     id="defs2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1">
+    <ellipse
+       style="fill:#7289DA"
+       id="background"
+       cx="400"
+       cy="400"
+       rx="380"
+       ry="380" />
+    <ellipse
+       style="fill:#ff0000;fill-rule:evenodd"
+       id="inner-circle"
+       cx="400"
+       cy="550"
+       rx="50"
+       ry="50" />
+    <ellipse
+       style="fill:#ff0000;fill-rule:evenodd"
+       id="ellipse14"
+       cx="506"
+       cy="506"
+       rx="50"
+       ry="50" />
+    <ellipse
+       style="fill:#ff0000;fill-rule:evenodd"
+       id="ellipse16"
+       cx="550"
+       cy="400"
+       rx="50"
+       ry="50" />
+    <ellipse
+       style="fill:#ff0000;fill-rule:evenodd"
+       id="ellipse18"
+       cx="506"
+       cy="294"
+       rx="50"
+       ry="50" />
+    <ellipse
+       style="fill:#ff0000;fill-rule:evenodd"
+       id="ellipse20"
+       cx="400"
+       cy="250"
+       rx="50"
+       ry="50" />
+    <ellipse
+       style="fill:#ff0000;fill-rule:evenodd"
+       id="ellipse22"
+       cx="294"
+       cy="294"
+       rx="50"
+       ry="50" />
+    <ellipse
+       style="fill:#ff0000;fill-rule:evenodd"
+       id="ellipse24"
+       cx="250"
+       cy="400"
+       rx="50"
+       ry="50" />
+    <ellipse
+       style="fill:#ff0000;fill-rule:evenodd"
+       id="ellipse26"
+       cx="294"
+       cy="506"
+       rx="50"
+       ry="50" />
+    <ellipse
+       style="fill:none;stroke:#ff0000;stroke-width:2"
+       id="path28"
+       cx="400"
+       cy="400"
+       rx="225"
+       ry="225" />
+    <ellipse
+       style="fill:none;stroke:#ff0000;stroke-width:4"
+       id="ellipse30"
+       cx="400"
+       cy="400"
+       rx="250"
+       ry="250" />
+    <ellipse
+       style="fill:none;stroke:#ff0000;stroke-width:8"
+       id="ellipse32"
+       cx="400"
+       cy="400"
+       rx="275"
+       ry="275" />
+    <ellipse
+       style="fill:none;stroke:#ff0000;stroke-width:16"
+       id="ellipse34"
+       cx="400"
+       cy="400"
+       rx="300"
+       ry="300" />
+  </g>
+</svg>
