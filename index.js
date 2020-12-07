@@ -32,7 +32,11 @@ async function doUpdate(child, message) {
   const repo = (await git.remote(['get-url',REMOTE])).trim().replace(/\.git$/,'');
   const status = await git.status();
   if (!status.isClean()) {
-    child.send({ t: 'edit', msg: message.msg, chan: message.chan, content: `Unable to update, some files have been changed. Staying at <${repo}/commit/${log.latest.hash}>`});
+    child.send({ t: 'edit', msg: message.msg, chan: message.chan, content: { embed: {
+      title: 'Error',
+      description: `Some files have been changed. Staying at [${log.latest.hash.substring(0,6)}](${repo}/commit/${log.latest.hash})`,
+      color: 0xff0000,
+    }}});
     return;
   }
   console.log('Closing old client...');
@@ -64,15 +68,29 @@ async function doUpdate(child, message) {
     if (error === undefined) {
       if (log.latest.hash !== newLog.latest.hash) {
         newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan,
-          content: `Succesfully updated, <${repo}/compare/${newLog.latest.hash}..${log.latest.hash}>`,
+          content: { embed: {
+            title: 'Succesfully updated',
+            description: `Updated to [${newLog.latest.hash.substring(0,6)}](${repo}/compare/${newLog.latest.hash}..${log.latest.hash})`,
+            color: 0x00ff00,
+          }},
         });
       } else {
         newChild.emit('send', { t: 'edit', msg: message.msg, chan: message.chan,
-          content: `Nothing to update, still at <${repo}/commit/${newLog.latest.hash}>`,
+          content: { embed: {
+            title: 'Nothing to update',
+            description: `Still at [${newLog.latest.hash.substring(0,6)}](${repo}/commit/${newLog.latest.hash})`,
+            color: 0x00ff00,
+          }},
        });
       }
     } else {
-      newChild.emit('send', { t: 'edit', msg: message.msg, chan: message.chan, content: error.toString() });
+      newChild.emit('send', { t: 'edit', msg: message.msg, chan: message.chan,
+        content: { embed: {
+          title: 'Error updating',
+          description: error.toString(),
+          color: 0xff0000,
+        }}
+      });
     }
   });
 }
