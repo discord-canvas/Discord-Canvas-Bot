@@ -590,6 +590,21 @@
             "4": {"image": true},
             "5": {"image": true}
           }
+        },
+        "9": {
+          "image": true,
+          "alt_desc": "Homework Sheet:\n\thttps://liverpool.instructure.com/courses/17569/files/1410445/download?download_frd=1\nSolutions:\n\tNot Released",
+          "children": {
+            "1": {"image": true},
+            "2": {"image": true},
+            "3": {
+              "image": true,
+              "children": {
+                "1": {"image": true},
+                "2": {"image": true}
+              }
+            }
+          }
         }
       }
     }
