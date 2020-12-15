@@ -140,6 +140,7 @@ const Config = Object.freeze({
   api: TypeOrDefault(String, 'https://instructure.com/api/v1'),
   course_filter: TypeOrDefault(String, '(.*)'),
   sam_course_filter: TypeOrDefault(String, '.'),
+  sam_blocklist: TypeOrDefault(Array, []),
   question_directory: TypeOrDefault(String, "questions/"),
   answer_directory: TypeOrDefault(String, "answers/"),
   prefix: TypeOrDefault(String, 'ca!'),
