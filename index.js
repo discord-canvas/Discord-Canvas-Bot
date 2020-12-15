@@ -70,7 +70,7 @@ async function doUpdate(child, message) {
         newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan,
           content: { embed: {
             title: 'Succesfully updated',
-            description: `Updated to [${newLog.latest.hash.substring(0,6)}](${repo}/compare/${newLog.latest.hash}..${log.latest.hash})`,
+            description: `Updated to [${newLog.latest.hash.substring(0,6)}](${repo}/compare/${log.latest.hash}..${newLog.latest.hash})`,
             color: 0x00ff00,
           }},
         });
