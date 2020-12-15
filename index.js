@@ -110,6 +110,22 @@ function doNpmInstall() {
   })
 }
 
+async function restart(child, message) {
+  console.log('Closing old client...');
+  await awaitClose(child);
+  if (!child.killed) child.kill('SIGKILL');
+  console.log('Starting client');
+  const newChild = start();
+  newChild.once('ready', function() {
+    newChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan,
+      content: { embed: {
+        title: 'Succesfully restarted',
+        color: 0x00ff00,
+      }},
+    });
+  });
+}
+
 function start() {
   if (activeChild !== undefined) throw new Error('A client already exists, cannot start');
   const events = new EventEmitter();
@@ -125,6 +141,8 @@ function start() {
     events.emit(message.t, child, message);
   });
   events.on('update', asyncWrap(doUpdate) );
+  events.on('shutdown', shutdown);
+  events.on('restart', asyncWrap(restart));
   events.on('send', function(message) {
     child.send(message);
   });
