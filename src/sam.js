@@ -67,7 +67,7 @@ Sam.prototype.getCourses = getCourses;
 const getFilteredCourses = async function() {
   const courses = await this.getCourses();
   const regex = new RegExp(this.options.sam_course_filter, 'g');
-  return courses.filter(course => course.match(regex) !== null);
+  return courses.filter(course => course.match(regex) !== null && !this.options.sam_blocklist.includes(course));
 }
 Sam.prototype.getFilteredCourses = getFilteredCourses;
 

@@ -30,12 +30,12 @@
   },
   "homepage": "https://github.com/CammyFentreux/Discord-Homework-Bot#readme",
   "dependencies": {
-    "@douile/bot-utilities": "^1.1.0",
-    "discord.js-light": "^3.3.6",
+    "@douile/bot-utilities": "^1.2.4",
+    "discord.js-light": "^3.4.2",
     "dotenv": "^8.2.0",
     "node-fetch": "^2.6.1",
     "node-html-parser": "^2.0.0",
-    "simple-git": "^2.22.0",
+    "simple-git": "^2.28.0",
     "sqlite3": "^5.0.0"
   },
   "optionalDependencies": {
@@ -45,6 +45,6 @@
     "zlib-sync": "^0.1.7"
   },
   "devDependencies": {
-    "eslint": "^7.13.0"
+    "eslint": "^7.15.0"
   }
 }
