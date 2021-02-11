@@ -607,6 +607,18 @@
           }
         }
       }
+    },
+    "108": {
+      "alt_desc": "Data Structures and Algorithms\nProfessor Prudence Wong (pwong@liverpool.ac.uk)\nOffice hours: Fridays 2:15pm - 3:45pm on MS Teams (COMP108-2020/21-O365-Team)\nDemonstrators:\n\tMr Micheal Abaho, Mr Alpay Ozkeskin, Mr Yales Rios Vasconcelos, Mr Benjamin Smith, Miss Yanhua Xu"
+    },
+    "116": {
+      "alt_desc": "Analytic Techniques\nProfessor Paul Dunne (ped@csc.liv.ac.uk)\nMS Teams – COMP116-2020-21-O365-Team\nWeb: http://www.csc.liv.ac.uk/~ped/COMP116/"
+    },
+    "122": {
+      "alt_desc": "Object Oriented Programming\nProfessor Patrick Totzke (totzke@liverpool.ac.uk)"
+    },
+    "124": {
+      "alt_desc": "Computer Systems\n Dr Stuart Thomason (s.thomason@liverpool.ac.uk)\nMS Teams - COMP124 (2020-21)-O365-Team"
     }
   }
 }
