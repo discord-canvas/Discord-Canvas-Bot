@@ -23,7 +23,8 @@ const client = new Client({
 	cacheRoles: false,
 	cacheEmojis: false,
 	cachePresences: false,
-  presence: BOT_PRESENCE
+  presence: BOT_PRESENCE,
+  disableMentions: 'everyone',
 });
 
 /*******************************************************************************
