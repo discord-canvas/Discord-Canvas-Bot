@@ -3,26 +3,28 @@
 const fs = require('fs').promises;
 
 exports.sendImage = async (destination, path) => {
-  const image = await fs.readFile(path + '.png')
-  await destination.send('', {files:[image]})
+  const image = await fs.readFile(path + '.png');
+  await destination.send({ embed: {image:{url:'attachment://image.png'}}, files: [{ attachment: image, name: 'image.png' }] });
 }
 
 exports.sendNode = async (destination, node, path) => {
   // sends all relevent information about a homework node
+  const embed = {};
+  let files;
+
   if (node.image) {
-    await exports.sendImage(destination, path)
+    const image = await fs.readFile(path + '.png');
+    embed.image = { url: 'attachment://image.png' };
+    files = [{ attachment: image, name: 'image.png' }];
   }
 
-  let message = ''  // collates messages into one rather than sending many
   if (node.alt_desc) {
-    message += `\n${node.alt_desc}\n`
-  }
-  if (node.children) {
-    message += '\nSubs:\n'
-    for (let key of Object.keys(node.children)) {
-      message += `\t${key}\n`
-    }
+    embed.description = node.alt_desc;
   }
 
-  if (message) {await destination.send(message)}
+  if (node.children) {
+    embed.fields = [{name: 'Subs', inline: false, value: Object.keys(node.children).map(key => `\t${key}`).join('\n') }];
+  }
+
+  await destination.send({ embed, files });
 }
