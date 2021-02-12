@@ -22,7 +22,9 @@ Configuration of the bot is done in the `.config.json` file, there is an example
 ```javascript
 {
   "api": String, // The base URL of the canvas API
-  "course_filter": String, // A regex filter for course names retrieved from /courses
+  "course_filter": String?, // A regex filter for course names retrieved from canvas /courses
+  "sam_course_filter": String?, // A regex filter for course names retrieved from SAM
+  "sam_blocklist": [String]?, // List of courses to not fetch assignments for from SAM
   "question_directory": String?, // Relative path to directory containing questions
   "answer_directory": String?, // Relative path to directory containing answers
   "prefix": String?, // The bot command prefix (default "ca!"), its what is put before commands e.g. "ca!help"
@@ -100,6 +102,7 @@ The bot requires 2 API keys, for canvas and discord. These are set via environme
 ```
 DISCORD_TOKEN=Discord bot token
 CANVAS_TOKEN=Canvas API token
+SAM_TOKEN=SAM session token
 ```
 With these variables set you can run the bot using
 ```bash
