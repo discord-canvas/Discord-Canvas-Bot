@@ -1,7 +1,7 @@
 {
   "name": "canvas-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Monitor upcoming assignments from canvas and SAM via discord.",
   "main": "index.js",
   "scripts": {
     "test": "npx eslint src *.js",
@@ -23,12 +23,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CammyFentreux/Discord-Homework-Bot.git"
+    "url": "git+https://github.com/discord-canvas/Discord-Canvas-Bot.git"
   },
   "bugs": {
-    "url": "https://github.com/CammyFentreux/Discord-Homework-Bot/issues"
+    "url": "https://github.com/discord-canvas/Discord-Canvas-Bot/issues"
   },
-  "homepage": "https://github.com/CammyFentreux/Discord-Homework-Bot#readme",
+  "homepage": "https://github.com/discord-canvas/Discord-Canvas-Bot#readme",
   "dependencies": {
     "@douile/bot-utilities": "^1.3.1",
     "discord.js-light": "^3.5.3",
