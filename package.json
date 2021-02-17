@@ -35,7 +35,7 @@
     "dotenv": "^8.2.0",
     "node-fetch": "^2.6.1",
     "node-html-parser": "^2.1.0",
-    "simple-git": "^2.34.2",
+    "simple-git": "^2.35.0",
     "sqlite3": "^5.0.1"
   },
   "optionalDependencies": {
@@ -45,6 +45,6 @@
     "zlib-sync": "^0.1.7"
   },
   "devDependencies": {
-    "eslint": "^7.19.0"
+    "eslint": "^7.20.0"
   }
 }
