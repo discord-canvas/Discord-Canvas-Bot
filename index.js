@@ -30,8 +30,8 @@ async function doUpdate(child, message) {
   });
   const log = await git.log();
   const repo = (await git.remote(['get-url',REMOTE])).trim().replace(/\.git$/,'');
-  const status = await git.status();
-  if (!status.isClean()) {
+  const git_status = await git.status();
+  if (hasGitChanged(git_status)) {
     child.send({ t: 'edit', msg: message.msg, chan: message.chan, content: { embed: {
       title: 'Error',
       description: `Some files have been changed. Staying at [${log.latest.hash.substring(0,6)}](${repo}/commit/${log.latest.hash})`,
@@ -108,6 +108,16 @@ function doNpmInstall() {
       reject(exitCode, signal);
     })
   })
+}
+
+function hasGitChanged(git_status) {
+  if (!git_status.isClean()) {
+    for (let file of git_status.files) {
+      if (!['package.json','package-lock.json'].includes(file.path))
+        return true;
+    }
+  }
+  return false;
 }
 
 async function restart(child, message) {
