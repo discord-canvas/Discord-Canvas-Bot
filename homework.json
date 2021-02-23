@@ -620,7 +620,16 @@
             "3": {"image": true},
             "4": {"image": true}
           }
-        }
+        },
+        "3": {
+          "alt_desc": "Download Page: https://liverpool.instructure.com/courses/19756/pages/lab-week-3",
+          "image": true,
+          "children": {
+            "1": {"image": true},
+            "2": {"image": true},
+            "3": {"image": true},
+            "4": {"image": true}
+          }
       }
     },
     "116": {
