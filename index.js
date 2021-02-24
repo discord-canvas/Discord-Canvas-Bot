@@ -45,25 +45,41 @@ async function doUpdate(child, message) {
   await git.checkout(BRANCH);
   console.log('Starting update...');
   let error, newLog;
+  const reset = async function() {
+    await git.reset('hard');
+    await git.checkout(log.latest.hash);
+  };
+
   try {
     await git.pull();
     newLog = await git.log();
   } catch(e) {
     console.warn(e);
-    await git.checkout(log.latest.hash);
-    error = `Error downloading updates, reverting to old version <${repo}/commit/${log.latest.hash}>`;
+    await reset();
+    error = `Error downloading updates, reverting to old version [${log.latest.hash.substring(0,6)}](${repo}/commit/${log.latest.hash})`;
   }
   if (error === undefined) {
     try {
       await doNpmInstall();
     } catch(e) {
       console.warn(e);
-      await git.checkout(log.latest.hash);
-      error = `Error installing dependencies, reverting to old version <${repo}/commit/${log.latest.has}>`;
+      await reset();
+      error = `Error installing dependencies, reverting to old version [${log.latest.hash.substring(0,6)}](${repo}/commit/${log.latest.hash})`;
     }
   }
   console.log('Update done, starting client');
-  const newChild = start();
+  const newChild = start(async function(exitCode) {
+    if (exitCode === 0) return;
+    await reset();
+    const newErrorChild = start(); // If this child fails, there is nothing we can do
+    newErrorChild.emit('send',{ t: 'edit', msg: mesasge.msg, chan: message.chan,
+      content: { embed: {
+        title: 'Problem with new version',
+        description: `[${newLog.latest.hash.substring(0,6)}](${repo}/commit/${newLog.latest.hash}) exited with code \`${exitCode}\`, reverted to [${log.latest.hash}](${repo}/commit/${log.latest.hash})`,
+        color: 0xff0000,
+      }},
+    });
+  });
   newChild.once('ready', function() {
     if (error === undefined) {
       if (log.latest.hash !== newLog.latest.hash) {
@@ -136,7 +152,7 @@ async function restart(child, message) {
   });
 }
 
-function start() {
+function start(onExit) {
   if (activeChild !== undefined) throw new Error('A client already exists, cannot start');
   const events = new EventEmitter();
   const child = spawn(process.argv0, [`${__dirname}/src/index.js`], {
@@ -149,6 +165,10 @@ function start() {
   child.on('error', console.error);
   child.on('message', function(message) {
     events.emit(message.t, child, message);
+  });
+  child.once('exit', function() {
+    console.log('Client shutdown...');
+    if (onExit !== undefined) onExit.apply(this, arguments);
   });
   events.on('update', asyncWrap(doUpdate) );
   events.on('shutdown', shutdown);
