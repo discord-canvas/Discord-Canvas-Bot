@@ -33,7 +33,7 @@ class CanvasUtils {
     let promises = [];
     for (let courseID in courses) {
       promises.push(this.canvas.getCourseAssignments(courseID));
-      promises.push(this.canvas.getCourseDiscussions(courseID));
+      // promises.push(this.canvas.getCourseDiscussions(courseID));
     }
     let assignments = (await Promise.all(promises)).flat();
     const samCourses = await this.sam.getFilteredCourses();
