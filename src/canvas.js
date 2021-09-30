@@ -82,7 +82,9 @@ class Canvas {
   }
 
   async getCourses() {
-    return req.getPaginated(`${this.api}/courses`, this.token);
+    return (await req.getPaginated(`${this.api}/courses`, this.token)).filter(c => {
+      return 'name' in c && 'id' in c;
+    });
   }
 
   async getFilteredCourses() {
