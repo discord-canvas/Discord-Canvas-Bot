@@ -72,7 +72,7 @@ async function doUpdate(child, message) {
     if (exitCode === 0) return;
     await reset();
     const newErrorChild = start(); // If this child fails, there is nothing we can do
-    newErrorChild.emit('send',{ t: 'edit', msg: mesasge.msg, chan: message.chan,
+    newErrorChild.emit('send',{ t: 'edit', msg: message.msg, chan: message.chan,
       content: { embed: {
         title: 'Problem with new version',
         description: `[${newLog.latest.hash.substring(0,6)}](${repo}/commit/${newLog.latest.hash}) exited with code \`${exitCode}\`, reverted to [${log.latest.hash}](${repo}/commit/${log.latest.hash})`,
