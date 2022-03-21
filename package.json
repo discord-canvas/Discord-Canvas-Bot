@@ -30,19 +30,19 @@
   },
   "homepage": "https://github.com/discord-canvas/Discord-Canvas-Bot#readme",
   "dependencies": {
-    "@douile/bot-utilities": "^1.3.1",
-    "discord.js-light": "^3.5.3",
-    "dotenv": "^8.2.0",
-    "node-fetch": "^2.6.1",
-    "node-html-parser": "^2.1.0",
-    "simple-git": "^2.35.0",
-    "sqlite3": "^4.2.0"
+    "@douile/bot-utilities": "^1.3",
+    "discord.js-light": "^3.5",
+    "dotenv": "^8.2",
+    "node-fetch": "^2.6",
+    "node-html-parser": "^2.1",
+    "simple-git": "^3.4.0",
+    "sqlite3": "^4.2"
   },
   "optionalDependencies": {
-    "bufferutil": "^4.0.2",
+    "bufferutil": "^4.0",
     "erlpack": "github:discord/erlpack",
-    "utf-8-validate": "^5.0.3",
-    "zlib-sync": "^0.1.7"
+    "utf-8-validate": "^5.0",
+    "zlib-sync": "^0.1"
   },
   "devDependencies": {
     "eslint": "^7.20.0"
