@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require('fs').promises;
-const { Client } = require('discord.js-light');
+const { Client, Intents } = require('discord.js-light');
 const sqlite3 = require('sqlite3');
 
 const Canvas = require('./canvas.js');
@@ -17,6 +17,7 @@ const { Config, enforceType } = require('./types.js');
 *******************************************************************************/
 
 const client = new Client({
+  intents: Intents.FLAGS.GUILD_MESSAGES | Intents.FLAGS.GUILDS,
   cacheGuilds: false,
 	cacheChannels: false,
 	cacheOverwrites: false,
