@@ -17,7 +17,7 @@ const { Config, enforceType } = require('./types.js');
 *******************************************************************************/
 
 const client = new Client({
-  intents: Intents.FLAGS.GUILD_MESSAGES | Intents.FLAGS.GUILDS,
+  intents: Intents.FLAGS.GUILD_MESSAGES | Intents.FLAGS.GUILDS | Intents.FLAGS.MESSAGE_CONTENT,
   cacheGuilds: false,
 	cacheChannels: false,
 	cacheOverwrites: false,
@@ -26,6 +26,7 @@ const client = new Client({
 	cachePresences: false,
   presence: BOT_PRESENCE,
   disableMentions: 'everyone',
+  partials: ['MESSAGE'],
 });
 
 /*******************************************************************************
@@ -55,10 +56,12 @@ async function loadCommands() {
 client.on('ready', function() {
   ipcSend({ t: 'ready', id: client.user.id }).then(null,console.error);
   console.log(`Logged in as ${client.user.username}`);
-  client.generateInvite({permissions:BOT_PERMISSIONS}).then(link => console.log(`Invite link ${link}`), console.error);
+  const invite = client.generateInvite({scopes: ['bot'], permissions:BOT_PERMISSIONS});
+  console.log(`Invite link ${invite}`);
+  console.log(client.config);
 });
 
-client.on('message', asyncWrap(async function(message) {
+client.on('messageCreate', asyncWrap(async function(message) {
   if (message.author.bot) return;
   if (!message.content.startsWith(client.config.prefix)) return;
   const parts = message.content.substring(client.config.prefix.length).trim().split(/  */);
@@ -100,6 +103,8 @@ function awaitOpen(database) {
     database.once('open', resolve);
   });
 }
+
+let assignmentInterval;
 
 const startBot = module.exports = async function(botToken, canvasToken, samToken, config) {
   const db = new sqlite3.Database(DB_NAME, sqlite3.OPEN_READWRITE);
@@ -145,7 +150,7 @@ const startBot = module.exports = async function(botToken, canvasToken, samToken
   await client.login(botToken);
   if (config.automated_assignments.length > 0) {
     await assignmentAutoUpdate(client);
-    client.setInterval(asyncWrap(assignmentAutoUpdate), 1000 * 60 * 30, client);
+    assignmentInterval = setInterval(asyncWrap(assignmentAutoUpdate), 1000 * 60 * 30, client);
   }
   return client;
 }
@@ -176,6 +181,7 @@ let hasShutdown = true;
 function shutdown() {
   if (hasShutdown) return;
   hasShutdown = true;
+  clearInterval(assignmentInterval);
   const shardCount = client.ws.shards.size;
   console.log(`Shutting down ${shardCount} shards`);
   let shardsDestroyed = 0, closed = false;

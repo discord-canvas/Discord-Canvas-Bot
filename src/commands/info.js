@@ -6,7 +6,7 @@ const { EMBED_COLOR } = require('../constants.js');
 
 async function call(msg) {
   const memoryUsage = process.memoryUsage();
-  await msg.channel.send({embed: {
+  await msg.channel.send({embeds: [{
     title: `${msg.client.user.username} info`,
     color: EMBED_COLOR,
     fields: [
@@ -23,7 +23,7 @@ async function call(msg) {
 Created by <@!426056810672291840> and <@!293482190031945739>`
       }
     ],
-  }});
+  }]});
 }
 
 exports.name = 'info';

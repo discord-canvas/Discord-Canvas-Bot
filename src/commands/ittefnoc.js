@@ -9,8 +9,8 @@ const { EMBED_COLOR } = require('../constants.js')
 const call = async function(message) {
   const embed = new MessageEmbed({ color: EMBED_COLOR, image: { url: 'attachment://ittefnoc.gif' } });
   const imageBuffer = await fs.readFile(join(__dirname,'../../assets/ittefnoc.gif'));
-  embed.attachFiles(new MessageAttachment(imageBuffer, 'ittefnoc.gif'));
-  await message.channel.send({embed});
+  const files = [new MessageAttachment(imageBuffer, 'ittefnoc.gif')];
+  await message.channel.send({embeds: [embed], files});
 }
 
 exports.name = 'ittefnoc';

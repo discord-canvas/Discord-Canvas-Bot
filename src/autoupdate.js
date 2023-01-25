@@ -88,14 +88,14 @@ async function sendWeekUpdate(client, update, weekTimes, autoConf, embed, sentCh
       await m.edit({embed});
     } else {
       // console.log('Update new message')
-      const message = await client.channels.forge(autoConf.channel).send({embed});
+      const message = await client.channels.forge(autoConf.channel).send({embeds: [embed]});
       week.messages.push({ messageID: message.id, channelID: autoConf.channel, week });
       save = true;
     }
   } else {
     if (autoConf.channel in sentChannels) return save;
     // console.log('Non update new message');
-    const message = await client.channels.forge(autoConf.channel).send({embed});
+    const message = await client.channels.forge(autoConf.channel).send({embeds: [embed]});
     week.messages.push({ messageID: message.id, channelID: message.channel.id, week });
     save = true;
   }
