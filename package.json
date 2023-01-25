@@ -31,20 +31,20 @@
   "homepage": "https://github.com/discord-canvas/Discord-Canvas-Bot#readme",
   "dependencies": {
     "@douile/bot-utilities": "^1.3",
-    "discord.js-light": "^4.9",
-    "dotenv": "^8.2",
+    "discord.js-light": "^4.10",
+    "dotenv": "^16.0",
     "node-fetch": "^2.6",
-    "node-html-parser": "^2.1",
-    "simple-git": "^3.4.0",
-    "sqlite3": "^4.2"
+    "node-html-parser": "^6.1",
+    "simple-git": "^3.16",
+    "sqlite3": "^5.1"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0",
     "erlpack": "github:discord/erlpack",
-    "utf-8-validate": "^5.0",
+    "utf-8-validate": "^6.0",
     "zlib-sync": "^0.1"
   },
   "devDependencies": {
-    "eslint": "^7.20.0"
+    "eslint": "^8.32.0"
   }
 }
